@@ -1,0 +1,14 @@
+{
+  "repository_suggested": "portafolio-profesional",
+  "github_profile": "https://github.com/ccaballeroperu2022",
+  "github_pages_expected": "https://ccaballeroperu2022.github.io/portafolio-profesional/",
+  "security": "No product source code, databases, credentials or installable packages included.",
+  "featured_projects": [
+    "SysTeraCore CRM 360",
+    "SysTeraCore ERP 360",
+    "NexoVentas Pro",
+    "Sistema web para colegios",
+    "Diagnóstico técnico local con OCR",
+    "Evaluación académica local con OCR"
+  ]
+}
