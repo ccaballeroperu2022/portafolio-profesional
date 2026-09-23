@@ -1,4 +1,4 @@
-# SysTera Social — Automatización comercial v1.0
+# SysTera Social — Automatización comercial v1.2
 
 **Autoría:** Ingeniero de Sistemas Carlos Andrés Caballero Castillo. Material original de SysTeraCore.
 
@@ -22,7 +22,7 @@ El modo predeterminado es **preparación, no publicación**. Produce cuatro copy
 2. Su identidad debe ser administradora de la Página, con las tareas y permisos exigidos para publicar, por ejemplo `pages_manage_posts` y `pages_read_engagement` y, cuando corresponda, `pages_show_list`, sujetos a revisión y modo de aplicación.
 3. Obtenga el **ID numérico de la PÁGINA** y el **Page Access Token**. No utilice el ID del perfil personal en `FB_PAGE_ID`.
 4. Guarde los valores como variables locales de entorno o secretos de GitHub. Nunca en este repositorio, una conversación o Drive compartido.
-5. En `config/posts.json` redacte contenido original nuevo después de agotar los originales, compruebe que no sea spam y ejecute de forma explícita `RUN_PUBLISH=true python src/social.py run --publish --render`.
+5. El workflow de GitHub intenta publicar automáticamente cuando existan credenciales válidas y permisos oficiales; de lo contrario deja el lote listo y reporta PENDIENTE. Para pruebas locales el modo por defecto sigue siendo sólo preparación y puede habilitarse publicación con `RUN_PUBLISH=true python src/social.py run --publish --render`.
 
 Verificación: el programa devuelve `PUBLICADO_VERIFICADO` sólo cuando la API confirma la existencia del ID recién creado. El permalink, si la API lo proporciona, se registra.
 
@@ -40,7 +40,7 @@ Verificación: el programa devuelve `PUBLICADO_VERIFICADO` sólo cuando la API c
 
 Una vez instalado en `systera-social/` en la rama principal de un repositorio personal con Actions habilitado, la plantilla `.github/workflows/systera-social-8h.yml` programa corridas a las 00:17, 08:17 y 16:17 de Perú, con posible retraso de GitHub. La corrida se puede iniciar con **Run workflow**. Se conservan los ZIP de cada lote en los **artifacts** de la ejecución durante 30 días.
 
-**Secrets necesarios cuando esté preparado para publicar:** `FB_PAGE_ID`, `FB_PAGE_ACCESS_TOKEN`, `YOUTUBE_TARGET_CHANNEL_ID`, `YOUTUBE_CLIENT_SECRET_JSON_BASE64`, `YOUTUBE_OAUTH_TOKEN_JSON_BASE64`. Los valores base64 se obtienen de sus archivos OAuth privados. La variable del repositorio `RUN_PUBLISH` debe ser exactamente `true`; por defecto todo queda en modo preparación. La acción no podrá publicar mientras falten permisos o secretos autorizados; no los suplanta ni los inventa.
+**Secrets necesarios cuando esté preparado para publicar:** `FB_PAGE_ID`, `FB_PAGE_ACCESS_TOKEN`, `YOUTUBE_TARGET_CHANNEL_ID`, `YOUTUBE_CLIENT_SECRET_JSON_BASE64`, `YOUTUBE_OAUTH_TOKEN_JSON_BASE64`. Los valores base64 se obtienen de sus archivos OAuth privados. El workflow ya fija `RUN_PUBLISH=true` por autorización comercial del titular. Sin credenciales oficiales no publica y registra pendiente. No es necesario cambiar variables manualmente de activación; el consentimiento OAuth del titular sigue siendo intransferible.
 
 Almacene el repositorio **preferentemente privado**. El GitHub vinculado actualmente contiene únicamente el repositorio público `portafolio-profesional`; por eso una eventual rama en él debe contener **sólo código y material publicable**. Los secretos nunca entran en el commit.
 
@@ -48,7 +48,7 @@ El archivo `data/state.json` sólo se incorpora por GitHub Actions después de c
 
 ## Límites transparentes y prevención de duplicados
 
-- `--publish` más `RUN_PUBLISH=true` habilitan los envíos, pero exigen credenciales válidas y configuración previa. Sin credenciales genera entregables y muestra **PENDIENTE**.
+- En GitHub el flujo invoca `--publish` con `RUN_PUBLISH=true`. Los envíos sólo se realizan con credenciales válidas y permisos oficiales, por lo que sin ellos genera entregables y muestra **PENDIENTE**.
 - Sólo publica una pieza por plataforma y corrida de ocho horas; prepara cuatro anuncios y dos guiones para selección. Nunca publica las cuatro variantes idénticas en múltiples grupos.
 - Al agotar las piezas originales del catálogo (12 copys y cuatro shorts en la primera versión), necesita nuevos guiones originales. Una ejecución periódica **no** equivale a contenido ilimitado ni garantiza monetización.
 - La métrica de ingresos no se estima a partir de visualizaciones. Puede activar `YOUTUBE_ANALYTICS_ENABLED=true` sólo después del consentimiento específico `yt-analytics-monetary.readonly`; se intenta leer la estimación consolidada para un día anterior. Meta exige sus propias métricas reales desde sus productos de monetización.
