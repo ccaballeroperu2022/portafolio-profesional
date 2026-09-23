@@ -1,0 +1,58 @@
+[
+  {
+    "id": "FB-001",
+    "topic": "Excel + VBA",
+    "title": "𝗠𝗘𝗡𝗢𝗦 𝗧𝗔𝗥𝗘𝗔𝗦 𝗥𝗘𝗣𝗘𝗧𝗜𝗧𝗜𝗩𝗔𝗦",
+    "body": "Diseñamos macros Excel y formularios a medida para validar y consolidar información.",
+    "tags": "#ExcelVBA #MacrosExcel"
+  },
+  {
+    "id": "FB-002",
+    "topic": "Power BI",
+    "title": "𝗗𝗔𝗦𝗛𝗕𝗢𝗔𝗥𝗗𝗦 𝗣𝗔𝗥𝗔 𝗗𝗘𝗖𝗜𝗗𝗜𝗥",
+    "body": "Construimos modelos de datos y medidas DAX para analizar su negocio.",
+    "tags": "#PowerBI #DAX"
+  },
+  {
+    "id": "FB-003",
+    "topic": "Automatización",
+    "title": "𝗜𝗡𝗧𝗘𝗚𝗥𝗘 𝗦𝗨𝗦 𝗣𝗥𝗢𝗖𝗘𝗦𝗢𝗦",
+    "body": "Automatización e IA para formularios, alertas y reportes.",
+    "tags": "#Automatización #IA"
+  },
+  {
+    "id": "FB-004",
+    "topic": "Sistemas Web",
+    "title": "𝗦𝗜𝗦𝗧𝗘𝗠𝗔𝗦 𝗔 𝗠𝗘𝗗𝗜𝗗𝗔",
+    "body": "Desarrollamos sistemas web de ventas, inventario y administración.",
+    "tags": "#DesarrolloWeb #SysTeraCore"
+  },
+  {
+    "id": "FB-005",
+    "topic": "Excel + VBA",
+    "title": "𝗦𝗨 𝗘𝗫𝗖𝗘𝗟 𝗣𝗨𝗘𝗗𝗘 𝗛𝗔𝗖𝗘𝗥 𝗠Á𝗦",
+    "body": "Automatice validaciones y reportes con controles adaptados a su proceso.",
+    "tags": "#ExcelAvanzado #VBA"
+  },
+  {
+    "id": "FB-006",
+    "topic": "Power BI",
+    "title": "𝗘𝗡𝗧𝗜𝗘𝗡𝗗𝗔 𝗦𝗨𝗦 𝗜𝗡𝗗𝗜𝗖𝗔𝗗𝗢𝗥𝗘𝗦",
+    "body": "Visualice tendencias, compare periodos y mida productividad.",
+    "tags": "#PowerBI #Analítica"
+  },
+  {
+    "id": "FB-007",
+    "topic": "IA y negocios",
+    "title": "𝗗𝗘𝗟 𝗙𝗢𝗥𝗠𝗨𝗟𝗔𝗥𝗜𝗢 𝗔𝗟 𝗥𝗘𝗣𝗢𝗥𝗧𝗘",
+    "body": "Diseñamos integraciones web y automatizaciones con trazabilidad.",
+    "tags": "#IAParaNegocios #Automatización"
+  },
+  {
+    "id": "FB-008",
+    "topic": "Software Web",
+    "title": "𝗖𝗢𝗡𝗧𝗥𝗢𝗟 𝗗𝗘 𝗔𝗖𝗖𝗘𝗦𝗢𝗦 𝗬 𝗥𝗘𝗣𝗢𝗥𝗧𝗘𝗦",
+    "body": "Sistemas web con roles, bitácora y módulos administrativos.",
+    "tags": "#SistemasWeb #SoftwareAMedida"
+  }
+]
