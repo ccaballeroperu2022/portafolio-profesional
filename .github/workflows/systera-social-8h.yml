@@ -7,7 +7,7 @@ on:
     paths:
       - '.github/workflows/systera-social-8h.yml'
       - 'systera-social/src/**'
-      - 'systera-social/config/**'
+      - 'systera-social/config/posts.json'   # actualizar Shorts ANTES y posts AL FINAL
       - 'systera-social/tests/**'
       - 'systera-social/requirements.txt'
 permissions:
