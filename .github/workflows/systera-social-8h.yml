@@ -3,6 +3,13 @@ on:
   schedule:
     - cron: '17 5,13,21 * * *'  # 00:17, 08:17 y 16:17 PET (UTC-5); evita hora punta
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/systera-social-8h.yml'
+      - 'systera-social/src/**'
+      - 'systera-social/config/**'
+      - 'systera-social/tests/**'
+      - 'systera-social/requirements.txt'
 permissions:
   contents: write
 concurrency:
