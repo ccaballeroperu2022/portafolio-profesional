@@ -1,0 +1,89 @@
+SYSTERA SOCIAL AUTOMATION V1.0 – MANUAL INICIAL PARA WINDOWS 11
+Autor: Ingeniero de Sistemas Carlos Andrés Caballero Castillo
+Vigencia inicial: 23/09/2026, hora Perú
+
+PASO 1. DESCOMPRIMIR
+Extraiga el ZIP en C:\SysTera\systera-social (carpeta sin espacios).
+
+PASO 2. INSTALAR PYTHON Y FFMPEG (GRATUITOS)
+Verifique en CMD: python --version. Si no existe, instale Python desde python.org y active PATH.
+Verifique: ffmpeg -version. Si no existe, instale el programa desde ffmpeg.org o con winget install Gyan.FFmpeg.
+Cierre y abra CMD después de instalar ffmpeg.
+
+PASO 3. CREAR ENTORNO AISLADO
+Abra CMD en C:\SysTera\systera-social.
+Ejecute: python -m venv .venv
+Luego: .venv\Scripts\activate
+Luego: python -m pip install -r requirements.txt
+Para comprobar: python -m pytest -q tests
+
+PASO 4. PRIMERA PRUEBA SIN REDES (NO NECESITA CONTRASEÑAS)
+Ejecute: python src\social.py run --render
+Abra la subcarpeta output\FECHA-FRANJA.
+Encontrará: cuatro textos para Facebook, dos guiones, dos MP4 verticales, cola CSV y REPORTE.md.
+Reproduzca ambos MP4 para verificar audio y textos.
+Nota: los videos llevan subtítulos grandes y música original; no incluye locución humana.
+
+PASO 5. CONFIGURAR FACEBOOK (SOLO SU PÁGINA, NO PERFIL PERSONAL)
+En Meta for Developers: registre o seleccione la aplicación y configure permisos de Página.
+Solicite el permiso pages_manage_posts y otros permisos que exija la pantalla de Meta.
+Copie el ID numérico de la PÁGINA, no su ID de perfil personal.
+Obtenga un token de acceso de PÁGINA utilizando la autorización oficial.
+Cree en Windows las variables de entorno FB_PAGE_ID y FB_PAGE_ACCESS_TOKEN.
+NO pegue el token en archivos públicos ni lo envíe al chat.
+Pruebe primero en un entorno autorizado por Meta y no fuerce las autorizaciones denegadas.
+
+PASO 6. CONFIGURAR YOUTUBE (CANAL EXISTENTE)
+Entre a Google Cloud con su cuenta. Habilite YouTube Data API v3.
+Configure consentimiento OAuth. Cree cliente de escritorio y guarde su JSON en
+C:\SysTera\systera-social\secrets\client_secret.json
+En CMD, con el entorno activado, ejecute:
+python src\social.py authorize-youtube
+Abra el navegador y autorice el canal que vaya a utilizar.
+Revise que secrets\youtube_token.json exista (archivo privado).
+Configure YOUTUBE_TARGET_CHANNEL_ID con el ID confirmado del canal en YouTube Studio.
+Si la API obliga a modo privado por auditoría pendiente, la publicación no contará como pública.
+
+PASO 7. PUBLICAR UNA VEZ EN FORMA AUTORIZADA
+En una consola con variables de entorno correctas:
+set RUN_PUBLISH=true
+python src\social.py run --render --publish
+Si no hay credenciales válidas, la ejecución registra el error sin fingir publicaciones.
+Abra output\FECHA-FRANJA\REPORTE.md y revise ID, URL y estado.
+No publique de nuevo una pieza ya verificada por error: data\state.json impide duplicados.
+
+PASO 8. CREAR SEGUNDO CANAL
+Hágalo dentro de YouTube, con la cuenta del titular, confirme verificación y 2FA.
+Su nombre editorial provisional y sus series están en config\segundo_canal.txt.
+Para publicar desde el segundo canal, cree y autorice credenciales OAuth para ese canal.
+No mezcle los tokens de diferentes canales ni declare el segundo canal monetizado.
+
+PASO 9. GRUPOS DE FACEBOOK
+Meta retiró la API oficial que permitía publicar automáticamente en grupos.
+En config\grupos.csv incluya nombre, URL, 'si' y enlace/captura de la regla que autoriza promoción.
+El sistema le dejará los textos en cola_grupos_MANUAL.csv, pero NO los publicará.
+Publique con las funciones nativas de Facebook, respetando los permisos y límites de cada grupo.
+Anote la URL de cada publicación aceptada en la hoja de control y marque verificado sólo tras comprobarlo.
+
+PASO 10. EJECUTAR CADA OCHO HORAS
+Opción A – GitHub Actions: coloque la carpeta systera-social en un repo con Actions.
+La plantilla del repositorio ejecuta los lotes a las 00:00/08:00/16:00 hora Perú (puede haber retraso).
+Use GitHub Secrets para tokens y credenciales, nunca archivos versionados.
+Deje RUN_PUBLISH=false hasta comprobar ambas conexiones y permisos.
+Opción B – Programador de tareas de Windows: abra taskschd.msc, nueva tarea básica,
+inicio diario 00:00, repetir cada 8 horas, duración indefinida; acción:
+Programa: C:\SysTera\systera-social\.venv\Scripts\python.exe
+Argumentos: C:\SysTera\systera-social\src\social.py run --render
+Directorio: C:\SysTera\systera-social
+Añada --publish SOLAMENTE si ya configuró RUN_PUBLISH=true y autorizó ambos canales.
+
+PASO 11. CONTROL Y AUDITORÍA
+Cada ejecución: ver REPORTE.md, archivos JSON, cola CSV y data\state.json.
+Separar preparados, publicados verificables, grupos, videos y estimaciones de ingresos reales.
+El ingreso del canal no se inventa: se obtiene sólo con acceso autorizado a YouTube Analytics.
+El importe histórico desconocido no es S/ 0.
+
+PASO 12. LIMITACIONES
+La primera librería contiene 12 anuncios y 4 guiones; no copie y republique indefinidamente.
+No crear cuentas ni monetizar sin superar los controles de identidad y condiciones de las plataformas.
+No proporcionar tokens a terceros ni subir secretos a GitHub público.
