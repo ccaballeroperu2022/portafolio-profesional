@@ -1,4 +1,4 @@
-SYSTERA SOCIAL AUTOMATION V1.0 – MANUAL INICIAL PARA WINDOWS 11
+SYSTERA SOCIAL AUTOMATION V1.1 – MANUAL INICIAL PARA WINDOWS 11
 Autor: Ingeniero de Sistemas Carlos Andrés Caballero Castillo
 Vigencia inicial: 23/09/2026, hora Perú
 
@@ -67,7 +67,7 @@ Anote la URL de cada publicación aceptada en la hoja de control y marque verifi
 
 PASO 10. EJECUTAR CADA OCHO HORAS
 Opción A – GitHub Actions: coloque la carpeta systera-social en un repo con Actions.
-La plantilla del repositorio ejecuta los lotes a las 00:00/08:00/16:00 hora Perú (puede haber retraso).
+La plantilla del repositorio ejecuta los lotes a las 00:17/08:17/16:17 hora Perú (puede haber retraso).
 Use GitHub Secrets para tokens y credenciales, nunca archivos versionados.
 Deje RUN_PUBLISH=false hasta comprobar ambas conexiones y permisos.
 Opción B – Programador de tareas de Windows: abra taskschd.msc, nueva tarea básica,
@@ -87,3 +87,6 @@ PASO 12. LIMITACIONES
 La primera librería contiene 12 anuncios y 4 guiones; no copie y republique indefinidamente.
 No crear cuentas ni monetizar sin superar los controles de identidad y condiciones de las plataformas.
 No proporcionar tokens a terceros ni subir secretos a GitHub público.
+
+ANEXO ACTUALIZADO – CONEXIÓN DE SERVICIOS MCP
+GitHub y Google Drive están conectados en ChatGPT. La herramienta Windsor.ai para Facebook y estadísticas de YouTube requiere instalación y consentimiento del titular en ChatGPT; no se puede activar por código. No reemplaza el OAuth de YouTube Upload que exige Google. Para la automatización del repositorio, los tokens deben introducirse PRIVADAMENTE en GitHub > Settings > Secrets and variables > Actions. RUN_PUBLISH permanece en false hasta completar las conexiones autorizadas. No enviar contraseñas o tokens por el chat.
