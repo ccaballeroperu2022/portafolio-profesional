@@ -1,0 +1,54 @@
+[
+  {
+    "id": "YT-001",
+    "title": "Automatización Excel que sí sirve",
+    "hook": "¿COPIAR Y PEGAR TODO EL DÍA?",
+    "scenes": [
+      "VALIDA REGISTROS",
+      "CONSOLIDA INFORMACIÓN",
+      "GENERA REPORTES",
+      "CONTROLA TU TIEMPO",
+      "COTIZA TU PROYECTO"
+    ],
+    "description": "Excel + VBA a medida. https://wa.me/51948370116 #ExcelVBA #Shorts"
+  },
+  {
+    "id": "YT-002",
+    "title": "Power BI: tres preguntas útiles",
+    "hook": "¿GRÁFICOS SIN RESPUESTAS?",
+    "scenes": [
+      "¿QUÉ CAMBIÓ EN VENTAS?",
+      "¿DÓNDE CAYÓ LA PRODUCCIÓN?",
+      "¿QUÉ TENDENCIA IMPORTA?",
+      "MODELA Y VERIFICA DAX",
+      "COTIZA TU DASHBOARD"
+    ],
+    "description": "Power BI + DAX. https://wa.me/51948370116 #PowerBI #Shorts"
+  },
+  {
+    "id": "YT-003",
+    "title": "Automatización para negocios",
+    "hook": "NO REPITA LO MISMO",
+    "scenes": [
+      "IDENTIFIQUE EL PROCESO",
+      "INTEGRE LOS DATOS",
+      "VALIDACIÓN HUMANA",
+      "MIDA LOS RESULTADOS",
+      "CONSÚLTENOS"
+    ],
+    "description": "Automatización IA. https://wa.me/51948370116 #Automatización #Shorts"
+  },
+  {
+    "id": "YT-004",
+    "title": "4 controles de un sistema web",
+    "hook": "SU SOFTWARE NECESITA CONTROL",
+    "scenes": [
+      "PERMISOS Y ROLES",
+      "REGISTRO DE CAMBIOS",
+      "REPORTES Y KPIS",
+      "RESPALDOS",
+      "SOLICITE SU PROYECTO"
+    ],
+    "description": "Sistemas web. https://wa.me/51948370116 #Software #Shorts"
+  }
+]
