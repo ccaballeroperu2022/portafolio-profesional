@@ -1,10 +1,292 @@
 [
-  {"id":"YT-001","topic":"Excel + VBA","title":"¿Todavía copias registros a mano? | Excel + VBA","hook":"¿TODAVÍA COPIAS Y PEGAS?","scenes":[["EL PROBLEMA","Registros repetidos. Errores. Horas perdidas."],["LA SOLUCIÓN","Valida formularios y consolida con VBA."],["EL CONTROL","Genera reportes según tus reglas de negocio."],["A TU MEDIDA","No todas las macros sirven para todos."],["CONTÁCTENOS","Escríbanos por WhatsApp para cotizar."]],"description":"Excel y VBA a medida para empresas y profesionales. https://wa.me/51948370116 | https://www.systeracore.com/ #ExcelVBA #MacrosExcel #Shorts"},
-  {"id":"YT-002","topic":"Power BI","title":"Tres preguntas que debe responder su Power BI","hook":"¿TIENE GRÁFICOS, PERO NO RESPUESTAS?","scenes":[["VENTAS","¿Qué cambió frente al periodo anterior?"],["PRODUCTIVIDAD","¿Dónde se concentra la diferencia?"],["TENDENCIAS","¿Qué indicador necesita atención?"],["MEDIDAS DAX","Un buen modelo evita cifras contradictorias."],["CONTÁCTENOS","Diseñamos dashboards a medida."]],"description":"Dashboards profesionales con Power BI y medidas DAX. https://wa.me/51948370116 #PowerBI #DAX #Shorts"},
-  {"id":"YT-003","topic":"Automatización","title":"Automatice un reporte sin perder el control","hook":"MENOS TAREAS REPETITIVAS","scenes":[["REVISE EL PROCESO","Primero: identifique el trabajo repetitivo."],["INTEGRE","Conecte formularios, tablas y alertas."],["VERIFIQUE","Mantenga validaciones y supervisión."],["MIDA","Registre incidencias y tiempos."],["CONTÁCTENOS","Diseñamos automatizaciones para negocios."]],"description":"Automatización web y análisis de procesos. https://wa.me/51948370116 #Automatización #IA #Shorts"},
-  {"id":"YT-004","topic":"Sistemas web","title":"Cuatro controles que necesita su sistema web","hook":"UN SISTEMA WEB NO ES SÓLO UNA PANTALLA","scenes":[["ROLES","Cada usuario, con permisos definidos."],["TRAZABILIDAD","Sepa quién registró cada cambio."],["REPORTES","Indicadores útiles y exportaciones."],["RESPALDOS","Recuperación y seguridad planificadas."],["CONTÁCTENOS","Software web a medida para negocios."]],"description":"Desarrollo de sistemas web empresariales a medida. https://wa.me/51948370116 #SistemasWeb #SoftwareAMedida #Shorts"},
-  {"id":"YT-005","topic":"Power BI","title":"DAX reutilizable: menos fórmulas repetidas en Power BI","hook":"SU MODELO DAX PUEDE SER MÁS MANTENIBLE","scenes":[["NUEVO EN 2026","Power BI ya admite funciones DAX definidas por el usuario."],["REUTILICE","Empaquete lógica parametrizada que usa en distintos cálculos."],["CONSISTENCIA","Una regla central reduce fórmulas duplicadas en el modelo."],["MODELE PRIMERO","La función no reemplaza un buen modelo ni la validación de datos."],["CONTÁCTENOS","Diseñamos modelos y dashboards Power BI a medida."]],"description":"Power BI y DAX aplicados a modelos mantenibles. https://wa.me/51948370116 | https://www.systeracore.com/ #PowerBI #DAX #BusinessIntelligence #Shorts"},
-  {"id":"YT-006","topic":"Automatización IA","title":"Tres controles antes de automatizar un proceso con IA","hook":"AUTOMATIZAR NO ES QUITAR EL CONTROL","scenes":[["ENTRADA","Defina qué dato inicia el flujo y valide su calidad."],["DECISIÓN","Separe lo automático de lo que necesita revisión humana."],["TRAZABILIDAD","Registre eventos, errores y resultados del proceso."],["INTEGRACIÓN","Conecte sólo servicios y APIs con permisos autorizados."],["CONTÁCTENOS","Diseñamos automatizaciones web e IA para negocios."]],"description":"Automatización con IA, integraciones y control de procesos. https://wa.me/51948370116 | https://www.systeracore.com/ #Automatización #IAParaNegocios #Integraciones #Shorts"},
-  {"id":"YT-007","topic":"Excel + VBA","title":"Excel con IA: no ponga una función retirada en su proceso","hook":"EXCEL CAMBIÓ: EVITE DISEÑAR SOBRE UNA FUNCIÓN RETIRADA","scenes":[["CAMBIO REAL","Microsoft retiró la función =COPILOT de Excel desde el 14 de septiembre de 2026."],["ALTERNATIVA","Copilot continúa disponible mediante el panel lateral de Excel."],["PROCESO ESTABLE","Para reglas repetibles, mantenga fórmulas, Power Query y VBA donde corresponda."],["VALIDACIÓN","La IA puede apoyar el análisis, pero los resultados deben revisarse."],["CONTÁCTENOS","Diseñamos soluciones Excel y VBA ajustadas a su proceso."]],"description":"Excel, VBA y automatización con criterios mantenibles. https://wa.me/51948370116 | https://www.systeracore.com/ #Excel #VBA #PowerQuery #Automatización #Shorts"},
-  {"id":"YT-008","topic":"Automatización IA","title":"Un asistente de IA puede construir el flujo, pero usted debe gobernarlo","hook":"IA MÁS RÁPIDA, CONTROL MÁS IMPORTANTE","scenes":[["ASISTENTE","n8n Assistant puede planificar y construir workflows desde lenguaje natural."],["CREDENCIALES","El flujo sigue necesitando conexiones y permisos autorizados."],["PRUEBAS","Antes de producción, pruebe filtros, excepciones y rutas de error."],["TRAZABILIDAD","Mantenga ejecuciones visibles y revise qué versión está publicada."],["CONTÁCTENOS","Diseñamos automatizaciones IA con control operativo."]],"description":"Automatización con IA y n8n aplicada a procesos reales. https://wa.me/51948370116 | https://www.systeracore.com/ #n8n #AutomatizaciónIA #Procesos #Shorts"}
+  {
+    "id": "YT-001",
+    "topic": "Excel + VBA",
+    "title": "¿Todavía copias registros a mano? | Excel + VBA",
+    "hook": "¿TODAVÍA COPIAS Y PEGAS?",
+    "scenes": [
+      [
+        "EL PROBLEMA",
+        "Registros repetidos. Errores. Horas perdidas."
+      ],
+      [
+        "LA SOLUCIÓN",
+        "Valida formularios y consolida con VBA."
+      ],
+      [
+        "EL CONTROL",
+        "Genera reportes según tus reglas de negocio."
+      ],
+      [
+        "A TU MEDIDA",
+        "No todas las macros sirven para todos."
+      ],
+      [
+        "CONTÁCTENOS",
+        "Escríbanos por WhatsApp para cotizar."
+      ]
+    ],
+    "description": "Excel y VBA a medida para empresas y profesionales. https://wa.me/51948370116 | https://www.systeracore.com/ #ExcelVBA #MacrosExcel #Shorts"
+  },
+  {
+    "id": "YT-002",
+    "topic": "Power BI",
+    "title": "Tres preguntas que debe responder su Power BI",
+    "hook": "¿TIENE GRÁFICOS, PERO NO RESPUESTAS?",
+    "scenes": [
+      [
+        "VENTAS",
+        "¿Qué cambió frente al periodo anterior?"
+      ],
+      [
+        "PRODUCTIVIDAD",
+        "¿Dónde se concentra la diferencia?"
+      ],
+      [
+        "TENDENCIAS",
+        "¿Qué indicador necesita atención?"
+      ],
+      [
+        "MEDIDAS DAX",
+        "Un buen modelo evita cifras contradictorias."
+      ],
+      [
+        "CONTÁCTENOS",
+        "Diseñamos dashboards a medida."
+      ]
+    ],
+    "description": "Dashboards profesionales con Power BI y medidas DAX. https://wa.me/51948370116 #PowerBI #DAX #Shorts"
+  },
+  {
+    "id": "YT-003",
+    "topic": "Automatización",
+    "title": "Automatice un reporte sin perder el control",
+    "hook": "MENOS TAREAS REPETITIVAS",
+    "scenes": [
+      [
+        "REVISE EL PROCESO",
+        "Primero: identifique el trabajo repetitivo."
+      ],
+      [
+        "INTEGRE",
+        "Conecte formularios, tablas y alertas."
+      ],
+      [
+        "VERIFIQUE",
+        "Mantenga validaciones y supervisión."
+      ],
+      [
+        "MIDA",
+        "Registre incidencias y tiempos."
+      ],
+      [
+        "CONTÁCTENOS",
+        "Diseñamos automatizaciones para negocios."
+      ]
+    ],
+    "description": "Automatización web y análisis de procesos. https://wa.me/51948370116 #Automatización #IA #Shorts"
+  },
+  {
+    "id": "YT-004",
+    "topic": "Sistemas web",
+    "title": "Cuatro controles que necesita su sistema web",
+    "hook": "UN SISTEMA WEB NO ES SÓLO UNA PANTALLA",
+    "scenes": [
+      [
+        "ROLES",
+        "Cada usuario, con permisos definidos."
+      ],
+      [
+        "TRAZABILIDAD",
+        "Sepa quién registró cada cambio."
+      ],
+      [
+        "REPORTES",
+        "Indicadores útiles y exportaciones."
+      ],
+      [
+        "RESPALDOS",
+        "Recuperación y seguridad planificadas."
+      ],
+      [
+        "CONTÁCTENOS",
+        "Software web a medida para negocios."
+      ]
+    ],
+    "description": "Desarrollo de sistemas web empresariales a medida. https://wa.me/51948370116 #SistemasWeb #SoftwareAMedida #Shorts"
+  },
+  {
+    "id": "YT-005",
+    "topic": "Power BI",
+    "title": "DAX reutilizable: menos fórmulas repetidas en Power BI",
+    "hook": "SU MODELO DAX PUEDE SER MÁS MANTENIBLE",
+    "scenes": [
+      [
+        "NUEVO EN 2026",
+        "Power BI ya admite funciones DAX definidas por el usuario."
+      ],
+      [
+        "REUTILICE",
+        "Empaquete lógica parametrizada que usa en distintos cálculos."
+      ],
+      [
+        "CONSISTENCIA",
+        "Una regla central reduce fórmulas duplicadas en el modelo."
+      ],
+      [
+        "MODELE PRIMERO",
+        "La función no reemplaza un buen modelo ni la validación de datos."
+      ],
+      [
+        "CONTÁCTENOS",
+        "Diseñamos modelos y dashboards Power BI a medida."
+      ]
+    ],
+    "description": "Power BI y DAX aplicados a modelos mantenibles. https://wa.me/51948370116 | https://www.systeracore.com/ #PowerBI #DAX #BusinessIntelligence #Shorts"
+  },
+  {
+    "id": "YT-006",
+    "topic": "Automatización IA",
+    "title": "Tres controles antes de automatizar un proceso con IA",
+    "hook": "AUTOMATIZAR NO ES QUITAR EL CONTROL",
+    "scenes": [
+      [
+        "ENTRADA",
+        "Defina qué dato inicia el flujo y valide su calidad."
+      ],
+      [
+        "DECISIÓN",
+        "Separe lo automático de lo que necesita revisión humana."
+      ],
+      [
+        "TRAZABILIDAD",
+        "Registre eventos, errores y resultados del proceso."
+      ],
+      [
+        "INTEGRACIÓN",
+        "Conecte sólo servicios y APIs con permisos autorizados."
+      ],
+      [
+        "CONTÁCTENOS",
+        "Diseñamos automatizaciones web e IA para negocios."
+      ]
+    ],
+    "description": "Automatización con IA, integraciones y control de procesos. https://wa.me/51948370116 | https://www.systeracore.com/ #Automatización #IAParaNegocios #Integraciones #Shorts"
+  },
+  {
+    "id": "YT-007",
+    "topic": "Excel + VBA",
+    "title": "Excel con IA: no ponga una función retirada en su proceso",
+    "hook": "EXCEL CAMBIÓ: EVITE DISEÑAR SOBRE UNA FUNCIÓN RETIRADA",
+    "scenes": [
+      [
+        "CAMBIO REAL",
+        "Microsoft retiró la función =COPILOT de Excel desde el 14 de septiembre de 2026."
+      ],
+      [
+        "ALTERNATIVA",
+        "Copilot continúa disponible mediante el panel lateral de Excel."
+      ],
+      [
+        "PROCESO ESTABLE",
+        "Para reglas repetibles, mantenga fórmulas, Power Query y VBA donde corresponda."
+      ],
+      [
+        "VALIDACIÓN",
+        "La IA puede apoyar el análisis, pero los resultados deben revisarse."
+      ],
+      [
+        "CONTÁCTENOS",
+        "Diseñamos soluciones Excel y VBA ajustadas a su proceso."
+      ]
+    ],
+    "description": "Excel, VBA y automatización con criterios mantenibles. https://wa.me/51948370116 | https://www.systeracore.com/ #Excel #VBA #PowerQuery #Automatización #Shorts"
+  },
+  {
+    "id": "YT-008",
+    "topic": "Automatización IA",
+    "title": "Un asistente de IA puede construir el flujo, pero usted debe gobernarlo",
+    "hook": "IA MÁS RÁPIDA, CONTROL MÁS IMPORTANTE",
+    "scenes": [
+      [
+        "ASISTENTE",
+        "n8n Assistant puede planificar y construir workflows desde lenguaje natural."
+      ],
+      [
+        "CREDENCIALES",
+        "El flujo sigue necesitando conexiones y permisos autorizados."
+      ],
+      [
+        "PRUEBAS",
+        "Antes de producción, pruebe filtros, excepciones y rutas de error."
+      ],
+      [
+        "TRAZABILIDAD",
+        "Mantenga ejecuciones visibles y revise qué versión está publicada."
+      ],
+      [
+        "CONTÁCTENOS",
+        "Diseñamos automatizaciones IA con control operativo."
+      ]
+    ],
+    "description": "Automatización con IA y n8n aplicada a procesos reales. https://wa.me/51948370116 | https://www.systeracore.com/ #n8n #AutomatizaciónIA #Procesos #Shorts"
+  },
+  {
+    "id": "YT-009",
+    "topic": "Power BI",
+    "title": "Un dashboard útil empieza antes del gráfico",
+    "hook": "PRIMERO LA PREGUNTA, DESPUÉS EL GRÁFICO",
+    "scenes": [
+      [
+        "PREGUNTA",
+        "Defina qué decisión necesita apoyar."
+      ],
+      [
+        "MODELO",
+        "Organice fuentes, relaciones y medidas DAX."
+      ],
+      [
+        "COMPARACIÓN",
+        "Compare periodos, metas y referencias."
+      ],
+      [
+        "DETALLE",
+        "Permita investigar qué explica una variación."
+      ],
+      [
+        "CONTÁCTENOS",
+        "Diseñamos Power BI orientado a decisiones reales."
+      ]
+    ],
+    "description": "Power BI, modelado y dashboards empresariales a medida. https://wa.me/51948370116 | https://www.systeracore.com/ #PowerBI #DAX #BusinessIntelligence #Shorts"
+  },
+  {
+    "id": "YT-010",
+    "topic": "Sistemas web",
+    "title": "Cuatro preguntas para saber si su sistema deja trazabilidad",
+    "hook": "¿SU SISTEMA PUEDE EXPLICAR CADA CAMBIO?",
+    "scenes": [
+      [
+        "USUARIO",
+        "¿Quién ejecutó la acción?"
+      ],
+      [
+        "CAMBIO",
+        "¿Qué información cambió?"
+      ],
+      [
+        "FECHA",
+        "¿Cuándo ocurrió el cambio?"
+      ],
+      [
+        "PERMISO",
+        "¿Qué autorización permitió la operación?"
+      ],
+      [
+        "CONTÁCTENOS",
+        "Sistemas web con roles, trazabilidad y reportes."
+      ]
+    ],
+    "description": "Desarrollamos sistemas web empresariales con controles ajustados al proceso. https://wa.me/51948370116 | https://www.systeracore.com/ #SistemasWeb #Trazabilidad #SoftwareAMedida #Shorts"
+  }
 ]
