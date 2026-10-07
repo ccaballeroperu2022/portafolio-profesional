@@ -1,0 +1,49 @@
+name: Render Reels V02
+on:
+  push:
+    paths:
+      - 'reels_batch_v2.py'
+      - '.github/workflows/render-reels-v02.yml'
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: System dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg espeak-ng fonts-dejavu-core
+      - name: Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install kokoro-onnx==0.6.1 soundfile pillow numpy
+      - name: Download Kokoro model
+        run: |
+          wget -q https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/kokoro-v1.0.int8.onnx
+          wget -q https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/voices-v1.0.bin
+      - name: Render 20 reels
+        run: python reels_batch_v2.py
+      - name: Validate output
+        run: |
+          test "$(find render_v02/mp4 -name '*.mp4' | wc -l)" -eq 20
+          python - <<'PY'
+          import json
+          d=json.load(open('render_v02/MANIFEST_V02.json',encoding='utf-8'))
+          assert len(d)==20
+          assert all(x['video_s'] >= 11 for x in d)
+          print(json.dumps(d,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: REELS_OCT_2026_Y_V02
+          path: |
+            render_v02/REELS_OCT_2026_Y_V02_20_MP4.zip
+            render_v02/MANIFEST_V02.json
+          if-no-files-found: error
+          retention-days: 7
