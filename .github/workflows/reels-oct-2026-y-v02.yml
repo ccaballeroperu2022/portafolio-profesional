@@ -25,14 +25,13 @@ jobs:
       - name: Render 20 reels
         run: python tools/reel_batch_v2/render.py
       - name: Verify MP4 batch
+        shell: bash
         run: |
-          test "$(find tools/reel_batch_v2/output -maxdepth 1 -name 'REEL_*.mp4' | wc -l)" -eq 20
+          count=$(find tools/reel_batch_v2/output -maxdepth 1 -name 'REEL_*.mp4' | wc -l)
+          test "$count" -eq 20
           for f in tools/reel_batch_v2/output/REEL_*.mp4; do
             d=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$f")
-            python - "$d" <<'PY'
-import sys
-assert float(sys.argv[1]) >= 11.0
-PY
+            python -c "import sys; assert float(sys.argv[1]) >= 11.0" "$d"
           done
       - uses: actions/upload-artifact@v4
         with:
