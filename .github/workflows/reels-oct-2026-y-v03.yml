@@ -1,0 +1,45 @@
+name: Reels OCT 2026 Y V03 - Final Batch MP4
+on:
+  push:
+    paths:
+      - '.github/workflows/reels-oct-2026-y-v03.yml'
+      - 'tools/reel_batch_v3/**'
+      - 'tools/reel_batch_v2/reels.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install --upgrade pip
+          pip install pillow edge-tts
+      - name: Render 20 differentiated reels
+        run: python tools/reel_batch_v3/render.py
+      - name: Verify final batch
+        shell: bash
+        run: |
+          count=$(find tools/reel_batch_v3/output -maxdepth 1 -name 'REEL_*_V03.mp4' | wc -l)
+          test "$count" -eq 20
+          for f in tools/reel_batch_v3/output/REEL_*_V03.mp4; do
+            d=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$f")
+            python -c "import sys; assert float(sys.argv[1]) >= 11.0" "$d"
+          done
+          test -f tools/reel_batch_v3/output/manifest_v03.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Reels-OCT-2026-Y-V03-FINAL
+          path: |
+            tools/reel_batch_v3/output/REEL_*_V03.mp4
+            tools/reel_batch_v3/output/manifest_v03.json
+          retention-days: 30
+          compression-level: 6
