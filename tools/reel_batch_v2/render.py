@@ -203,8 +203,8 @@ def render(frames,audio,out,i):
     cmd += ["-i",str(audio)]
     filters=[]
     for k in range(SCENES):
-        if k%2==0: filters.append(f"[{k}:v]scale=1120:1992,crop=1080:1920:20:36,fade=t=in:st=0:d=0.18,fade=t=out:st={max(0,seg-.18):.3f}:d=0.18,setpts=PTS-STARTPTS[v{k}]")
-        else: filters.append(f"[{k}:v]scale=1080:1920,fade=t=in:st=0:d=0.18,fade=t=out:st={max(0,seg-.18):.3f}:d=0.18,setpts=PTS-STARTPTS[v{k}]")
+        if k%2==0: filters.append(f"[{k}:v]scale=1120:1992,crop=1080:1920:20:36,setsar=1,fade=t=in:st=0:d=0.18,fade=t=out:st={max(0,seg-.18):.3f}:d=0.18,setpts=PTS-STARTPTS[v{k}]")
+        else: filters.append(f"[{k}:v]scale=1080:1920,setsar=1,fade=t=in:st=0:d=0.18,fade=t=out:st={max(0,seg-.18):.3f}:d=0.18,setpts=PTS-STARTPTS[v{k}]")
     filters.append("".join(f"[v{k}]" for k in range(SCENES))+f"concat=n={SCENES}:v=1:a=0[vout]")
     filters.append(f"[{SCENES}:a]afade=t=in:st=0:d=0.15,afade=t=out:st={max(0,ad-.35):.3f}:d=0.35,apad=pad_dur=2[aout]")
     cmd += ["-filter_complex",";".join(filters),"-map","[vout]","-map","[aout]","-t",f"{total:.3f}","-r",str(FPS),"-c:v","libx264","-preset","veryfast","-crf","25","-pix_fmt","yuv420p","-c:a","aac","-b:a","160k","-movflags","+faststart",str(out)]
