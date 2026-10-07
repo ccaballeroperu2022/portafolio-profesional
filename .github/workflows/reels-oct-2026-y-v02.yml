@@ -1,0 +1,42 @@
+name: Reels OCT 2026 Y V02 - Batch MP4
+on:
+  push:
+    paths:
+      - '.github/workflows/reels-oct-2026-y-v02.yml'
+      - 'tools/reel_batch_v2/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install --upgrade pip
+          pip install pillow edge-tts
+      - name: Render 20 reels
+        run: python tools/reel_batch_v2/render.py
+      - name: Verify MP4 batch
+        run: |
+          test "$(find tools/reel_batch_v2/output -maxdepth 1 -name 'REEL_*.mp4' | wc -l)" -eq 20
+          for f in tools/reel_batch_v2/output/REEL_*.mp4; do
+            d=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$f")
+            python - "$d" <<'PY'
+import sys
+assert float(sys.argv[1]) >= 11.0
+PY
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Reels-OCT-2026-Y-V02
+          path: tools/reel_batch_v2/output/REEL_*.mp4
+          retention-days: 30
+          compression-level: 6
