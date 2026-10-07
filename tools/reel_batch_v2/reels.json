@@ -1,0 +1,282 @@
+[
+  {
+    "slug": "ventas",
+    "title": "TUS VENTAS HABLAN",
+    "tag": "Ventas • utilidad • margen • metas",
+    "service": "Dashboard ejecutivo de ventas",
+    "chart": "bars",
+    "colors": [
+      "#FFF9EF",
+      "#1D6F52",
+      "#E0A33A",
+      "#242424"
+    ],
+    "narration": "Tus ventas no son solo números. Diseño dashboards en Excel y Power BI que revelan utilidad, margen, metas y crecimiento. Identifica qué vende, qué deja rentabilidad y dónde actuar primero. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "vba",
+    "title": "DE HORAS A SEGUNDOS",
+    "tag": "VBA • procesos • productividad",
+    "service": "Automatización profesional con Excel y VBA",
+    "chart": "flow",
+    "colors": [
+      "#F4FFF7",
+      "#087B55",
+      "#67C78A",
+      "#20372D"
+    ],
+    "narration": "Si una tarea se repite, puede automatizarse. Desarrollo soluciones con Excel y VBA para eliminar copias manuales, reducir errores y ejecutar procesos con un clic. Más productividad, menos retrabajo. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "gerencia",
+    "title": "DECIDE ANTES",
+    "tag": "KPIs • alertas • tendencias",
+    "service": "Power BI para gerencia y dirección",
+    "chart": "line",
+    "colors": [
+      "#FFFBEE",
+      "#7A5615",
+      "#F6C13D",
+      "#403519"
+    ],
+    "narration": "Una gerencia no necesita más archivos, necesita respuestas. Creo dashboards en Power BI con indicadores, tendencias y alertas que muestran qué está cambiando y dónde intervenir. Información ejecutiva para decidir antes. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "finanzas",
+    "title": "SIN PUNTOS CIEGOS",
+    "tag": "Caja • presupuesto • rentabilidad",
+    "service": "Control financiero y presupuestal",
+    "chart": "waterfall",
+    "colors": [
+      "#FFF7F1",
+      "#934E32",
+      "#E99A69",
+      "#3A2C28"
+    ],
+    "narration": "¿Sabes exactamente dónde gana y dónde pierde dinero tu operación? Desarrollo controles financieros en Excel y Power BI para caja, ingresos, egresos, presupuesto y rentabilidad. Convierte cifras dispersas en control. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "logistica",
+    "title": "STOCK BAJO CONTROL",
+    "tag": "Inventario • rotación • alertas",
+    "service": "Logística, inventarios y abastecimiento",
+    "chart": "donut",
+    "colors": [
+      "#F3FFFD",
+      "#096B6A",
+      "#40C1AD",
+      "#253E3C"
+    ],
+    "narration": "El stock incorrecto cuesta ventas y dinero. Diseño controles para inventario, rotación, compras, quiebres y alertas de stock crítico. Detecta excesos, faltantes y productos inmovilizados en segundos. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "rrhh",
+    "title": "PRODUCTIVIDAD VISIBLE",
+    "tag": "Asistencia • costos • desempeño",
+    "service": "Analítica de Recursos Humanos",
+    "chart": "radar",
+    "colors": [
+      "#FFF6F5",
+      "#A74D58",
+      "#F09AA4",
+      "#473034"
+    ],
+    "narration": "Los datos de recursos humanos pueden mostrar mucho más que asistencia. Creo tableros para productividad, costos, ausentismo y desempeño, con indicadores claros para detectar tendencias y actuar con evidencia. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "mineria",
+    "title": "CADA GUARDIA CUENTA",
+    "tag": "Toneladas • metros • HH/HM",
+    "service": "Control diario de operaciones mineras",
+    "chart": "gauge",
+    "colors": [
+      "#FBF7EA",
+      "#806126",
+      "#D7A94E",
+      "#3C3628"
+    ],
+    "narration": "En minería, cada guardia debe dejar trazabilidad. Desarrollo controles para toneladas, metros perforados, avance, horas hombre, horas máquina y productividad. Compara turnos y detecta desviaciones antes de perder rendimiento. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "clinicas",
+    "title": "DATOS QUE CUIDAN",
+    "tag": "Citas • ingresos • ocupación",
+    "service": "Gestión y analítica para clínicas",
+    "chart": "area",
+    "colors": [
+      "#F3FFFA",
+      "#2E8B78",
+      "#76CBB1",
+      "#2A403A"
+    ],
+    "narration": "Una clínica necesita controlar citas, atención e ingresos sin perder tiempo buscando información. Creo dashboards para pacientes, productividad médica, ocupación y facturación. Gestión más clara para decidir con rapidez. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "educacion",
+    "title": "AULA EN CONTROL",
+    "tag": "Matrícula • notas • asistencia",
+    "service": "Gestión académica y educativa",
+    "chart": "heatmap",
+    "colors": [
+      "#FFF9E9",
+      "#9A7625",
+      "#E8C05C",
+      "#433B29"
+    ],
+    "narration": "Transforma la información académica en decisiones. Desarrollo controles para matrículas, notas, asistencia, pagos y rendimiento por curso o grupo. Menos archivos dispersos y más visibilidad para administrar mejor. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "crm",
+    "title": "DE LEAD A VENTA",
+    "tag": "Embudo • conversión • forecast",
+    "service": "CRM y analítica comercial",
+    "chart": "funnel",
+    "colors": [
+      "#FCF6FF",
+      "#7A4B83",
+      "#C997D0",
+      "#413044"
+    ],
+    "narration": "No pierdas oportunidades por falta de seguimiento. Diseño controles comerciales y dashboards para leads, embudo, conversiones, vendedores y forecast. Identifica dónde se frenan las ventas y qué oportunidades priorizar. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "power-query",
+    "title": "UNA SOLA VERDAD",
+    "tag": "Consolida • limpia • actualiza",
+    "service": "Automatización con Power Query",
+    "chart": "pipeline",
+    "colors": [
+      "#F7FFF0",
+      "#5F7F35",
+      "#A7C86C",
+      "#354329"
+    ],
+    "narration": "¿Recibes decenas de archivos cada semana? Con Power Query puedo consolidarlos, limpiar datos y actualizar reportes sin repetir el proceso manual. Convierte carpetas dispersas en una fuente confiable y lista para analizar. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "dax",
+    "title": "MÉTRICAS QUE EXPLICAN",
+    "tag": "DAX • acumulados • variaciones",
+    "service": "Modelado y DAX avanzado",
+    "chart": "kpi",
+    "colors": [
+      "#FFF8E8",
+      "#8B6218",
+      "#E5B44A",
+      "#45351F"
+    ],
+    "narration": "Un dashboard bonito no sirve si sus métricas no responden al negocio. Desarrollo medidas DAX para acumulados, variaciones, metas y comparativos dinámicos. Indicadores correctos, contexto correcto, decisiones con fundamento. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "excel-avanzado",
+    "title": "EXCEL DEJA DE SER UNA HOJA",
+    "tag": "Fórmulas • tablas • segmentadores",
+    "service": "Excel avanzado profesional",
+    "chart": "sheet",
+    "colors": [
+      "#F0FFF5",
+      "#137446",
+      "#6BC88F",
+      "#293B32"
+    ],
+    "narration": "Excel puede ser mucho más que una hoja de cálculo. Diseño soluciones con fórmulas avanzadas, tablas dinámicas, segmentadores, validaciones y controles que convierten datos en una herramienta profesional de gestión. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "cobranzas",
+    "title": "RECUPERA CON FOCO",
+    "tag": "Vencidos • morosidad • cartera",
+    "service": "Dashboard de cobranzas y cartera",
+    "chart": "aging",
+    "colors": [
+      "#FFF5EC",
+      "#B4602B",
+      "#F0A067",
+      "#46342C"
+    ],
+    "narration": "Cobrar mejor empieza por saber a quién priorizar. Creo dashboards de cartera, vencidos, morosidad, recuperación y antigüedad para enfocar la gestión donde realmente impacta. Menos seguimiento a ciegas, más recuperación. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "compras",
+    "title": "COMPRA MEJOR",
+    "tag": "Costo • plazo • cumplimiento",
+    "service": "Compras y evaluación de proveedores",
+    "chart": "scatter",
+    "colors": [
+      "#F3FAFF",
+      "#3B7280",
+      "#79B7C3",
+      "#2D3C40"
+    ],
+    "narration": "El precio más bajo no siempre es la mejor compra. Desarrollo controles para costos, tiempos de entrega, cumplimiento y evaluación de proveedores. Compara desempeño y negocia con información real. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "operaciones",
+    "title": "ENCUENTRA EL CUELLO",
+    "tag": "Eficiencia • tiempos muertos • alertas",
+    "service": "Control y productividad de operaciones",
+    "chart": "process",
+    "colors": [
+      "#FBFBEF",
+      "#74752C",
+      "#C6C85B",
+      "#3B3C29"
+    ],
+    "narration": "Cuando la operación se frena, el dato debe mostrar dónde. Diseño tableros para productividad, eficiencia, tiempos muertos y alertas por proceso. Visualiza cuellos de botella y prioriza acciones antes de que afecten el resultado. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "proyectos",
+    "title": "AVANCE REAL",
+    "tag": "Cronograma • presupuesto • riesgos",
+    "service": "Control integral de proyectos",
+    "chart": "gantt",
+    "colors": [
+      "#F8F6FF",
+      "#675A91",
+      "#AAA0D4",
+      "#373247"
+    ],
+    "narration": "Un proyecto no se controla con percepciones. Creo dashboards para avance, presupuesto, cronograma, hitos y riesgos, con semáforos que muestran dónde actuar primero. Estado real del proyecto en una sola vista. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "servicio-cliente",
+    "title": "CADA TICKET HABLA",
+    "tag": "SLA • respuesta • satisfacción",
+    "service": "Analítica de servicio al cliente",
+    "chart": "sla",
+    "colors": [
+      "#F1FCFF",
+      "#227A8C",
+      "#69BFCB",
+      "#273D42"
+    ],
+    "narration": "Cada ticket contiene una señal sobre tu servicio. Diseño tableros para tiempos de respuesta, SLA, satisfacción, carga por agente y causas recurrentes. Detecta dónde se deteriora la experiencia y actúa con datos. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "automatizacion-empresarial",
+    "title": "TODO CONECTADO",
+    "tag": "Excel • Power BI • BD • flujos",
+    "service": "Automatización empresarial de punta a punta",
+    "chart": "network",
+    "colors": [
+      "#F6FFF4",
+      "#4F7D45",
+      "#91C782",
+      "#30422D"
+    ],
+    "narration": "Conecta datos, procesos y decisiones. Integro Excel, Power BI, bases de datos y automatizaciones para reducir tareas manuales y mantener información actualizada. Menos pasos aislados, más trazabilidad y control. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  },
+  {
+    "slug": "experto",
+    "title": "EXPERTO EN EXCEL Y POWER BI",
+    "tag": "Proyectos • dashboards • automatización",
+    "service": "Desarrollo profesional de trabajos y proyectos",
+    "chart": "master",
+    "colors": [
+      "#FFFDF5",
+      "#315F45",
+      "#E5B84D",
+      "#2D352F"
+    ],
+    "narration": "Si necesitas desarrollar un proyecto serio en Excel o Power BI, puedo ayudarte. Creo dashboards, automatizaciones, modelos, indicadores y soluciones personalizadas para distintas áreas y negocios. Convierte tus datos en control y decisiones. Visita systeracore.com y escríbeme gratis al WhatsApp más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis."
+  }
+]
