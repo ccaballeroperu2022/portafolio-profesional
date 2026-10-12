@@ -1,0 +1,68 @@
+name: Preview genuine actors for SysTeraPrime
+on:
+  push:
+    branches: [systeraprime-reel-cine-v2-20261012]
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - name: Load public licensed footage
+        run: |
+          python -m pip install -q pillow requests
+          cat > /tmp/check.py <<'PY'
+          import os,re,json,pathlib,requests,subprocess,io
+          from PIL import Image,ImageDraw,ImageFont
+          out=pathlib.Path('visual_review');out.mkdir(exist_ok=True)
+          api='https://huggingface.co/api/datasets/FastVideo/Mixkit-Src/tree/main/Business?recursive=false&expand=false'
+          res=requests.get(api,timeout=45);print('API',res.status_code,flush=True);res.raise_for_status()
+          files=[x['path'].split('/')[-1] for x in res.json() if x.get('path','').lower().endswith('.mp4')]
+          print('BUSINESS FILES',len(files),flush=True)
+          print('\n'.join(files),flush=True)
+          needles=['woman','man-wearing-a-suit','working-at-the-office','business-partners','meeting','document','report','chart','desk','paper','people','contract','businesswoman','collaborat','office']
+          candidates=[p for p in files if any(x in p.lower() for x in needles) and not any(x in p.lower() for x in ['highway','phone','street','aerial','city','car','people-dancing','stock'])]
+          candidates=candidates[:35]
+          print('CANDIDATES',len(candidates),flush=True)
+          rows=[];ok=[]
+          font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',17)
+          for i,name in enumerate(candidates):
+            try:
+              url='https://huggingface.co/datasets/FastVideo/Mixkit-Src/resolve/main/Business/'+name+'?download=true'
+              p=out/f'{i:02d}.mp4'
+              with requests.get(url,stream=True,timeout=70) as r:
+                r.raise_for_status()
+                with p.open('wb') as f:
+                  for chunk in r.iter_content(1<<18):
+                    if chunk:f.write(chunk)
+              check=subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','default=nw=1:nk=1',str(p)],capture_output=True,text=True)
+              if check.returncode:continue
+              duration=float(check.stdout.strip())
+              ims=[]
+              for j,t in enumerate((0.4,min(2.1,duration*.37),min(5.2,duration*.72))):
+                fr=out/f'f{i}_{j}.jpg'
+                subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-ss',str(t),'-i',str(p),'-vframes','1','-vf','scale=400:220:force_original_aspect_ratio=increase,crop=400:220',str(fr)],timeout=40)
+                ims.append(Image.open(fr).convert('RGB') if fr.exists() else Image.new('RGB',(400,220)))
+              row=Image.new('RGB',(1200,254),'#fcf9f5')
+              draw=ImageDraw.Draw(row);draw.text((12,2),str(i)+' · '+name.replace('mixkit-','').replace('_clip_1.mp4','')[:96],fill='#202020',font=font)
+              for j,im in enumerate(ims):row.paste(im,(j*400,32))
+              rows.append(row);ok.append(dict(index=i,name=name,seconds=duration))
+              print('OK',i,name,duration,flush=True)
+              p.unlink(missing_ok=True)
+            except Exception as e:print('ERROR',name,str(e)[:160],flush=True)
+          out.joinpath('index.json').write_text(json.dumps(ok,indent=2),encoding='utf-8')
+          if not rows:raise RuntimeError('No playable stock clips')
+          for n in range(0,len(rows),10):
+            group=rows[n:n+10];m=Image.new('RGB',(1200,254*len(group)),'white')
+            for j,r in enumerate(group):m.paste(r,(0,254*j))
+            m.save(out/f'preview_{n//10+1:02d}.jpg',quality=85)
+          PY
+          python /tmp/check.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SysTeraPrime_actor_preview
+          path: |
+            visual_review/*.jpg
+            visual_review/index.json
+          retention-days: 7
