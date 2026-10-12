@@ -1,0 +1,30 @@
+name: SysTeraPrime 10 Premium Cinematic Reels
+on:
+  push:
+    branches: [systeraprime-diez-reels-20261012-1408]
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  premium_movie:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        reel: [1]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install multimedia production software
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq -y ffmpeg fluidsynth fluid-soundfont-gm fonts-freefont-ttf fonts-liberation fonts-dejavu-core
+          python -m pip install -q pillow requests mido
+      - name: Render motion-picture Reel ${{ matrix.reel }}
+        run: |
+          python render.py --reel ${{ matrix.reel }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SysTeraPrime_Reel_${{ matrix.reel }}
+          path: output/
+          retention-days: 7
+          if-no-files-found: error
