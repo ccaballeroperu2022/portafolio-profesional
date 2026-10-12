@@ -1,88 +1,215 @@
-name: Preview genuine actors for SysTeraPrime
+name: SysTeraPrime cine lujo – real actors 40s
 on:
   push:
     branches: [systeraprime-reel-cine-v2-20261012]
   workflow_dispatch:
 permissions: { contents: read }
 jobs:
-  inspect:
+  render:
     runs-on: ubuntu-latest
-    timeout-minutes: 16
+    timeout-minutes: 32
     steps:
-      - name: Load public licensed footage
+      - name: Install film production tools
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          python -m pip install -q pillow requests
-          cat > /tmp/check.py <<'PY'
-          import os,re,json,pathlib,requests,subprocess,io
-          from PIL import Image,ImageDraw,ImageFont
-          out=pathlib.Path('visual_review');out.mkdir(exist_ok=True)
-          api='https://huggingface.co/api/datasets/FastVideo/Mixkit-Src/tree/main/Business?recursive=false&expand=false'
-          res=requests.get(api,timeout=45);print('API',res.status_code,flush=True);res.raise_for_status()
-          files=[x['path'].split('/')[-1] for x in res.json() if x.get('path','').lower().endswith('.mp4')]
-          print('BUSINESS FILES',len(files),flush=True)
-          print('\n'.join(files),flush=True)
-          needles=['woman','man-wearing-a-suit','working-at-the-office','business-partners','meeting','document','report','chart','desk','paper','people','contract','businesswoman','collaborat','office']
-          wanted=[
-            'mixkit-elegant-woman-working-on-a-computer-44749',
-            'mixkit-portrait-of-an-elegant-woman-working-in-her-office-44790',
-            'mixkit-woman-and-man-working-in-an-office-312',
-            'mixkit-man-and-woman-commenting-on-an-image-on-a-laptop-4904',
-            'mixkit-business-meeting-in-a-meeting-room-42644',
-            'mixkit-office-meeting-261',
-            'mixkit-professional-woman-writing-on-a-tablet-with-a-stylus-44784',
-            'mixkit-woman-using-a-tablet-in-the-office-42627',
-            'mixkit-entrepreneur-woman-typing-on-her-laptop-42652',
-            'mixkit-pair-of-happy-office-workers-shake-hands-strongly-30009',
-            'mixkit-well-dressed-businessman-sending-messages-on-his-cell-phone-4805',
-            'mixkit-portrait-of-a-woman-writing-in-a-notepad-49915',
-            'mixkit-business-woman-working-from-home-4956',
-            'mixkit-woman-in-her-living-room-working-writing-in-a-notepad-49914',
-            'mixkit-office-workers-dressed-in-suits-with-disapproving-gestures-4604',
-            'mixkit-satisfied-woman-finishes-her-work-and-leaves-the-office-44750',
-            'mixkit-woman-working-on-a-laptop-251',
-            'mixkit-woman-writing-on-a-tablet-with-a-stylus-44740',
-            'mixkit-professional-woman-working-in-home-office-49925']
-          candidates=[p for prefix in wanted for p in files if p.startswith(prefix+'_')]
-          print('CANDIDATES',len(candidates),flush=True)
-          rows=[];ok=[]
-          font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',17)
-          for i,name in enumerate(candidates):
-            try:
-              url='https://huggingface.co/datasets/FastVideo/Mixkit-Src/resolve/main/Business/'+name+'?download=true'
-              p=out/f'{i:02d}.mp4'
-              with requests.get(url,stream=True,timeout=70) as r:
-                r.raise_for_status()
-                with p.open('wb') as f:
-                  for chunk in r.iter_content(1<<18):
-                    if chunk:f.write(chunk)
-              check=subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','default=nw=1:nk=1',str(p)],capture_output=True,text=True)
-              if check.returncode:continue
-              duration=float(check.stdout.strip())
-              ims=[]
-              for j,t in enumerate((0.4,min(2.1,duration*.37),min(5.2,duration*.72))):
-                fr=out/f'f{i}_{j}.jpg'
-                subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-ss',str(t),'-i',str(p),'-vframes','1','-vf','scale=400:220:force_original_aspect_ratio=increase,crop=400:220',str(fr)],timeout=40)
-                ims.append(Image.open(fr).convert('RGB') if fr.exists() else Image.new('RGB',(400,220)))
-              row=Image.new('RGB',(1200,254),'#fcf9f5')
-              draw=ImageDraw.Draw(row);draw.text((12,2),str(i)+' · '+name.replace('mixkit-','').replace('_clip_1.mp4','')[:96],fill='#202020',font=font)
-              for j,im in enumerate(ims):row.paste(im,(j*400,32))
-              rows.append(row);ok.append(dict(index=i,name=name,seconds=duration))
-              print('OK',i,name,duration,flush=True)
-              p.unlink(missing_ok=True)
-            except Exception as e:print('ERROR',name,str(e)[:160],flush=True)
-          out.joinpath('index.json').write_text(json.dumps(ok,indent=2),encoding='utf-8')
-          if not rows:raise RuntimeError('No playable stock clips')
-          for n in range(0,len(rows),10):
-            group=rows[n:n+10];m=Image.new('RGB',(1200,254*len(group)),'white')
-            for j,r in enumerate(group):m.paste(r,(0,254*j))
-            m.save(out/f'preview_{n//10+1:02d}.jpg',quality=85)
+          sudo apt-get update -qq
+          sudo apt-get install -qq -y ffmpeg fluidsynth fluid-soundfont-gm fonts-dejavu-core
+          python -m pip install -q 'pillow>=10,<13' requests mido
+      - name: Render real-motion cinematic commercial
+        shell: bash
+        run: |
+          cat > /tmp/stp_render.py <<'PY'
+          import io, os, subprocess, pathlib, math, requests, wave, json, shutil
+          from PIL import Image, ImageDraw, ImageFont
+          from mido import MidiFile, MidiTrack, Message, MetaMessage, bpm2tempo
+          ROOT=pathlib.Path.cwd(); W=ROOT/'moviework'; W.mkdir(exist_ok=True)
+          OUT=ROOT/'finished'; OUT.mkdir(exist_ok=True)
+          AUDIO_URL='https://dnznrvs05pmza.cloudfront.net/text_to_speech/59391ef6-03a7-47e1-9962-598d24970756/SysTeraPrime_Cine_Premium___locucion_40_segundos.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMmU0M2ZlNDcyNTU1YzIxZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTkyNjM0M30.8Pl6Ypfgc40axK_ai23GGjaRQBGNpE63C3suaIy7Qec'
+          items=[
+           ('mixkit-woman-and-man-working-in-an-office-312_clip_1.mp4',6.0),
+           ('mixkit-woman-using-a-tablet-in-the-office-42627_clip_1.mp4',7.1),
+           ('mixkit-man-and-woman-commenting-on-an-image-on-a-laptop-4904_clip_1.mp4',7.1),
+           ('mixkit-woman-writing-on-a-tablet-with-a-stylus-44740_clip_1.mp4',7.1),
+           ('mixkit-elegant-woman-working-on-a-computer-44749_clip_1.mp4',7.1),
+           ('mixkit-well-dressed-businessman-sending-messages-on-his-cell-phone-4805_clip_1.mp4',7.35)
+          ]
+          assert abs(sum(x[1] for x in items)-41.75)<.001
+          def run(*args):
+           print('CMD',args[0],args[1:4],flush=True)
+           subprocess.run([str(x) for x in args],check=True)
+          def info(p):
+           cmd=['ffprobe','-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1:nokey=1',str(p)]
+           return float(subprocess.run(cmd,capture_output=True,text=True,check=True).stdout.strip())
+          def get(url,filename):
+           with requests.get(url,timeout=95,stream=True,headers={'User-Agent':'Mozilla/5.0'}) as r:
+            print('REQUEST',r.status_code,url.split('?')[0],flush=True);r.raise_for_status()
+            with filename.open('wb') as f:
+             for block in r.iter_content(262144):
+              if block:f.write(block)
+           if filename.stat().st_size<1024:raise ValueError('Bad media download '+str(filename))
+           print('MEDIA',filename,filename.stat().st_size,flush=True)
+          for i,(name,dur) in enumerate(items):
+           get('https://huggingface.co/datasets/FastVideo/Mixkit-Src/resolve/main/Business/'+name+'?download=true',W/f'clip{i}.mp4')
+           print('SOURCE',name,info(W/f'clip{i}.mp4'),flush=True)
+          voice=W/'voice.mp3'
+          get(AUDIO_URL,voice)
+          voice_len=info(voice)
+          print('VOICE_DURATION',voice_len,flush=True)
+          assert 20 < voice_len < 65
+          SERIF='/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf'
+          SERIF_B='/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf'
+          SANS='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+          SANS_B='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+          def font(s,b=False,ser=True):
+           return ImageFont.truetype((SERIF_B if b else SERIF) if ser else (SANS_B if b else SANS),s)
+          def centered(d,txt,y,size,color='#25221d',bold=False,serif=True,maxw=950):
+           ff=font(size,bold,serif);bb=d.textbbox((0,0),txt,font=ff);wt=bb[2]-bb[0]
+           while wt>maxw and size>22:
+            size-=2;ff=font(size,bold,serif);bb=d.textbbox((0,0),txt,font=ff);wt=bb[2]-bb[0]
+           d.text(((1080-wt)/2,y),txt,font=ff,fill=color,stroke_width=0)
+          def justified(d,l,r,y):
+           d.text((80,y),l,font=font(32,False,False),fill='#272b27')
+           ff=font(48,True);bb=d.textbbox((0,0),r,font=ff)
+           d.text((1000-(bb[2]-bb[0]),y-10),r,font=ff,fill='#a4783b')
+           d.line((80,y+70,1000,y+70),fill='#d0b991',width=2)
+          titles=[
+           ('TAREAS ACADÉMICAS',[('Acompañamiento profesional',''),('Desde','S/ 15')]),
+           ('INFORMES Y DATOS',[('Informes y monografías APA','S/ 30'),('Estadística y análisis','S/ 30')]),
+           ('PROYECTOS Y TESINAS',[('Proyectos y sistemas','S/ 50'),('Investigaciones y tesinas','S/ 80')]),
+           ('ASESORÍA DE TESIS',[('Asesoría integral de tesis','S/ 150'),('Otras áreas académicas','S/ 30')]),
+           ('PRESUPUESTO PERSONALIZADO',[]),
+           ('CONSULTA GRATUITA',[])
+          ]
+          def overlay(i):
+           name,rows=titles[i]
+           im=Image.new('RGBA',(1080,1920),(0,0,0,0));d=ImageDraw.Draw(im)
+           for y in range(1040,1400):
+            alpha=int((y-1040)/360*255)
+            d.line((0,y,1080,y),fill=(251,248,242,alpha),width=1)
+           d.rectangle((0,1400,1080,1920),fill='#fbf8f2')
+           d.rectangle((0,1370,1080,1378),fill='#b99761')
+           # Elegant top identification with a small light plaque
+           d.rounded_rectangle((120,43,960,126),radius=30,fill=(252,249,244,235),outline='#b99761',width=3)
+           centered(d,'SYSTERAPRIME  •  SERVICIOS ACADÉMICOS',65,29,'#8c632d',True,False,780)
+           # Gold hairline and serious editorial typography
+           centered(d,name,1440,60,'#24252a',False,True)
+           d.line((155,1530,925,1530),fill='#b99761',width=3)
+           if i<=3:
+            if i==0:
+             centered(d,'ASESORÍA PERSONALIZADA',1570,36,'#605544',False,False)
+             centered(d,'DESDE S/ 15',1642,76,'#a4783b',True,True)
+            else:
+             for k,(l,r) in enumerate(rows):justified(d,l,r,1572+k*108)
+           elif i==4:
+            centered(d,'PRECIOS REFERENCIALES',1572,42,'#a4783b',True,True)
+            centered(d,'Según extensión, complejidad, dedicación,',1645,31,'#393632',False,False)
+            centered(d,'citas, indicaciones, correcciones y plazos.',1693,31,'#393632',False,False)
+            centered(d,'Los proyectos integrales requieren evaluación.',1750,27,'#594d3e',True,False)
+           else:
+            centered(d,'MAGÍSTER CARLOS CABALLERO',1560,37,'#32302b',True,False)
+            centered(d,'WHATSAPP',1622,34,'#a4783b',True,False)
+            centered(d,'+51 948 370 116',1683,62,'#a4783b',True,True)
+            centered(d,'systeraprime.com',1775,38,'#272b27',True,False)
+           # Footer discreet but always readable
+           d.line((88,1848,992,1848),fill='#d4be99',width=2)
+           centered(d,'Magíster Carlos Caballero   |   systeraprime.com',1861,23,'#5b5750',False,False)
+           p=W/f'card{i}.png';im.save(p);return p
+          def shot(i,dur):
+           origin=W/f'clip{i}.mp4'; image=overlay(i);target=W/f'part{i}.mp4'
+           t=info(origin);ratio=(dur+.2)/t
+           filt=(f'[0:v]fps=30,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,gblur=sigma=18,eq=saturation=0.7[bg0];'
+                 f'[0:v]fps=30,scale=1080:1320:force_original_aspect_ratio=increase,crop=1080:1320,eq=contrast=1.06:saturation=1.04[hero0];'
+                 f'[bg0]setpts={ratio:.6f}*(PTS-STARTPTS)[bg];[hero0]setpts={ratio:.6f}*(PTS-STARTPTS)[hero];'
+                 f'[bg][hero]overlay=0:0:shortest=1[photo];[photo][1:v]overlay=0:0:shortest=1,format=yuv420p[v]')
+           run('ffmpeg','-y','-hide_banner','-loglevel','error','-i',origin,'-loop','1','-framerate','30','-i',image,
+               '-filter_complex',filt,'-map','[v]','-t',dur,'-r','30','-an','-c:v','libx264',
+               '-preset','veryfast','-crf','20','-pix_fmt','yuv420p',target)
+           print('SHOT',i,info(target),flush=True)
+           return target
+          parts=[shot(i,d) for i,(_,d) in enumerate(items)]
+          # Dissolves ensure cinematic continuity without losing total length.
+          inputs=[]
+          for p in parts:inputs.extend(['-i',p])
+          filters=[];last='0:v';acc=items[0][1]
+          for j in range(1,len(parts)):
+           out=f'x{j}'
+           off=round(acc-0.35*j,3)
+           filters.append(f'[{last}][{j}:v]xfade=transition=fade:duration=0.35:offset={off}[{out}]')
+           last=out;acc+=items[j][1]
+          filters.append(f'[{last}]trim=duration=40,setpts=PTS-STARTPTS,format=yuv420p[final]')
+          movie=W/'visual.mp4'
+          run('ffmpeg','-y','-hide_banner','-loglevel','error',*inputs,'-filter_complex',';'.join(filters),
+              '-map','[final]','-an','-r','30','-t','40','-c:v','libx264','-preset','veryfast','-crf','20','-pix_fmt','yuv420p',movie)
+          print('VISUAL',info(movie),flush=True)
+          # 40-second instrumental with real piano and string samples, original MIDI arrangement.
+          mid=MidiFile(ticks_per_beat=480)
+          def track(channel,program,notes):
+           tr=MidiTrack();mid.tracks.append(tr)
+           tr.append(Message('program_change',channel=channel,program=program,time=0))
+           ev=[]
+           for onset,pitch,length,volume in notes:
+            ev.extend([(int(onset*480),1,pitch,volume),(int((onset+length)*480),0,pitch,0)])
+           ev.sort(key=lambda e:(e[0],e[1]))
+           old=0
+           for t,on,p,v in ev:
+            tr.append(Message('note_on' if on else 'note_off',channel=channel,note=p,velocity=v,time=t-old));old=t
+           tr.append(MetaMessage('end_of_track'))
+          chords=[(50,57,62),(46,53,58),(53,60,65),(48,55,60)]*4
+          piano=[];strings=[];harp=[]
+          for bar,chord in enumerate(chords):
+           start=bar*4
+           for j in range(8):
+            n=chord[(j+(bar%2))%3]+(12 if j in (5,7) else 0)
+            piano.append((start+j*.5,n,.43,50 if j in (0,4) else 39))
+           for p in chord:strings.append((start,p,3.92,32))
+           if bar%2==1:
+            harp.append((start+3.5,chord[2]+12,.6,48))
+          track(0,0,piano);track(1,48,strings);track(2,46,harp)
+          musicmid=W/'score.mid';mid.save(musicmid)
+          sf='/usr/share/sounds/sf2/FluidR3_GM.sf2'
+          if not os.path.isfile(sf):
+           sf='/usr/share/sounds/sf2/TimGM6mb.sf2'
+          assert os.path.isfile(sf), 'No acoustic instruments soundfont installed'
+          score=W/'score.wav'
+          run('fluidsynth','-ni','-g','0.75',sf,musicmid,'-F',score,'-r','44100')
+          # Fit natural narrator to 39 seconds, preserve speech pitch.
+          speed=voice_len/38.8
+          assert 1.0<speed<1.5
+          audio=W/'sound.m4a'
+          flt=f'[0:a]atempo={speed:.5f},apad,volume=1.30[v];[1:a]atrim=duration=40,afade=t=out:st=38.2:d=1.8,volume=0.27[m];[v][m]amix=inputs=2:duration=first:dropout_transition=0[a]'
+          run('ffmpeg','-y','-hide_banner','-loglevel','error','-i',voice,'-i',score,
+              '-filter_complex',flt,'-map','[a]','-t','40','-c:a','aac','-b:a','192k',audio)
+          target=OUT/'SysTeraPrime_CINE_LUJO_40s_FINAL.mp4'
+          run('ffmpeg','-y','-hide_banner','-loglevel','error','-i',movie,'-i',audio,
+              '-map','0:v:0','-map','1:a:0','-t','40','-c:v','copy','-c:a','copy','-movflags','+faststart',target)
+          dur=info(target); print('FINAL',target, target.stat().st_size,'DURATION',dur,flush=True)
+          probe=subprocess.run(['ffprobe','-v','error','-show_entries','stream=codec_type,codec_name,width,height,r_frame_rate',
+          '-of','json',target],capture_output=True,text=True,check=True);metadata=json.loads(probe.stdout);print('META',metadata,flush=True)
+          assert 39.9<dur<40.2
+          assert any(s.get('codec_type')=='video' and s.get('width')==1080 and s.get('height')==1920 for s in metadata['streams'])
+          assert any(s.get('codec_type')=='audio' for s in metadata['streams'])
+          # Evidence thumbnails to review visual synchronization and legibility.
+          from PIL import ImageOps
+          frames=[]
+          for i,t in enumerate((2,9,16,23,30,37)):
+           fp=W/f'check{i}.png'
+           run('ffmpeg','-y','-hide_banner','-loglevel','error','-ss',t,'-i',target,'-frames:v','1',fp)
+           im=Image.open(fp).convert('RGB');frames.append(im.resize((405,720)))
+          sheet=Image.new('RGB',(1215,1440),'white')
+          for i,im in enumerate(frames):sheet.paste(im,((i%3)*405,(i//3)*720))
+          sheet.save(OUT/'VERIFICACION_6_ESCENAS.jpg',quality=88)
+          (OUT/'FICHA_TECNICA.txt').write_text(
+           'SysTeraPrime: película publicitaria real con tomas de actores stock bajo licencias Mixkit Stock Video Free. \n'
+           '40 s • 1080x1920 • 30 fps • H.264 MP4 • voz femenina español + música original.\n'
+           'Sin clases, sin ilustraciones o figuras 2D. Precios referenciales desde S/15 a S/150.\n',
+           encoding='utf8')
+          print('SUCCESS FINAL VERIFIED')
+          
           PY
-          python /tmp/check.py
-      - uses: actions/upload-artifact@v4
+          python /tmp/stp_render.py
+      - name: Export final MP4 and inspection frames
+        uses: actions/upload-artifact@v4
         with:
-          name: SysTeraPrime_actor_preview
-          path: |
-            visual_review/*.jpg
-            visual_review/index.json
+          name: SysTeraPrime_CINE_LUJO_40s_FINAL
+          path: finished/
           retention-days: 7
+          if-no-files-found: error
