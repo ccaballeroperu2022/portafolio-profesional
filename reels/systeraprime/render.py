@@ -11,21 +11,21 @@ ROOT=Path(__file__).resolve().parent
 WORK=ROOT/"work"
 WORK.mkdir(parents=True,exist_ok=True)
 OUT=ROOT/"SysTeraPrime_PELICULA_40s_REEL.mp4"
-W,H,FPS=720,1280,24
+W,H,FPS=900,1600,24
 DUR=5
 SERIF="/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"
 SANS="/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 BOLD="/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 GOLD=(243,198,112); WHITE=(255,251,239); MUTED=(230,223,208)
 SCENES=[
- ("business-meeting-in-a-meeting-room-42644","¿SU TESIS NO AVANZA?","ASESORÍA ACADÉMICA","Profesional • personalizada",""),
- ("business-woman-on-call-while-working-42628","APOYO EN TAREAS","ACOMPAÑAMIENTO","Orientación por actividad","S/ 15"),
- ("a-man-wearing-a-suit-works-at-the-office-1816","INFORMES Y APA","REDACCIÓN ACADÉMICA","Normas APA • referencias","S/ 30"),
- ("a-woman-having-a-telephone-call-in-her-office-233","ESTADÍSTICA","ANÁLISIS DE DATOS","Resultados e interpretación","S/ 30"),
- ("a-man-working-at-the-office-1820","PROYECTOS","INGENIERÍA Y SISTEMAS","Análisis • documentación","S/ 50"),
- ("business-woman-working-from-home-4956","INVESTIGACIONES","TESINAS Y ARTÍCULOS","Metodología • revisión","S/ 80"),
- ("a-woman-writing-an-email-on-her-smartphone-1787","ASESORÍA DE TESIS","PROYECTO DE INVESTIGACIÓN","Guía por etapas • observaciones","S/ 150"),
- ("close-up-view-of-a-cheerful-woman-on-a-phone-49933","¿SU SERVICIO NO APARECE?","COTICE GRATIS","Evaluamos su proyecto a medida",""),
+ ("a-young-woman-gazes-a-the-bookshelf-in-the-library-50728","¿TU TESIS SIGUE PENDIENTE?","INVESTIGA CON CRITERIO","Acompañamiento académico profesional",""),
+ ("a-woman-reading-a-book-at-a-coffee-shop-225","TAREAS ACADÉMICAS","ORIENTACIÓN PERSONALIZADA","Organización y revisión","S/ 15"),
+ ("a-woman-gently-turning-the-pages-of-a-book-50731","INFORMES Y MONOGRAFÍAS","NORMAS APA","Estructura • fuentes • referencias","S/ 30"),
+ ("a-woman-using-a-tablet-1784","ESTADÍSTICA","ANÁLISIS DE DATOS","Resultados • gráficos • interpretación","S/ 30"),
+ ("business-woman-on-call-while-working-42628","PROYECTOS Y SISTEMAS","DESARROLLO TÉCNICO","Análisis • diseño • documentación","S/ 50"),
+ ("a-young-woman-scans-the-library-shelf-and-then-picks-50718","INVESTIGACIONES","TESINAS Y ARTÍCULOS","Metodología • revisión • referencias","S/ 80"),
+ ("a-young-student-woman-picks-a-book-from-the-library-50714","ASESORÍA INTEGRAL DE TESIS","AVANCE POR ETAPAS","Guía metodológica • observaciones","S/ 150"),
+ ("close-up-view-of-a-cheerful-woman-on-a-phone-49933","¿NECESITA OTRO SERVICIO?","COTIZACIÓN GRATUITA","Cuéntenos su proyecto académico",""),
 ]
 def font(path,size):return ImageFont.truetype(path,size)
 def center(draw,text,y,f,fill):
@@ -36,6 +36,7 @@ def get_video(slug,i):
   session=requests.Session()
   session.headers.update({"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36","Referer":"https://mixkit.co/"})
   attempts=[f"https://assets.mixkit.co/videos/preview/mixkit-{slug}-{sz}.mp4" for sz in ("large","medium","small")]
+  attempts.append("https://huggingface.co/datasets/FastVideo/Mixkit-Src/resolve/main/Woman/mixkit-"+slug+"_clip_1.mp4?download=true")
   attempts.append("https://huggingface.co/datasets/FastVideo/Mixkit-Src/resolve/main/Business/mixkit-"+slug+"_clip_1.mp4?download=true")
   for url in attempts:
     try:
@@ -57,32 +58,40 @@ def overlay(scene,index):
   title,kicker,detail,price=scene[1:]
   im=Image.new("RGBA",(W,H),(0,0,0,0))
   d=ImageDraw.Draw(im)
-  # Subtle dark gradient for text legibility; remains one full-frame film scene.
+  # Cinematic light and gold. The full frame remains a continuous live-action shot.
   for y in range(H):
-    a=int(5+max(0,1-y/650)*28+max(0,(y-565)/(H-565))*204)
-    d.rectangle((0,y,W,y+1),fill=(6,16,26,min(218,a)))
-  d.rounded_rectangle((34,38,W-34,130),radius=16,fill=(8,26,38,175),outline=GOLD,width=2)
-  center(d,"SysTeraPrime",54,font(SERIF,46),GOLD)
-  d.line([(70,150),(650,150)],fill=GOLD,width=3)
-  center(d,"APOYO ACADÉMICO • METODOLOGÍA • INVESTIGACIÓN",169,font(BOLD,19),WHITE)
-  # Lower-third with champagne gold editorial treatment
-  d.rounded_rectangle((35,745,W-35,1218),radius=29,fill=(8,18,31,227),outline=GOLD,width=3)
-  center(d,title,782,font(BOLD,34),WHITE)
-  center(d,kicker,847,font(SERIF,28),GOLD)
-  center(d,detail,902,font(SANS,22),MUTED)
-  if price:
-    center(d,"DESDE",954,font(BOLD,23),WHITE)
-    center(d,price,988,font(SERIF,77),GOLD)
+    bottom=max(0.0,min(1.0,(y-980)/560))
+    top=max(0.0,1.0-y/300)
+    a=int(4+int(bottom*bottom*216)+int(top*top*84))
+    d.line([(0,y),(W,y)],fill=(12,16,19,min(230,a)))
+  # Small luxury emblem and consistent branding, not a collage/card.
+  d.line((76,68,824,68),fill=(219,182,112,218),width=2)
+  center(d,"SysTeraPrime",86,font(SERIF,64),(248,210,141))
+  center(d,"ASESORÍA ACADÉMICA  |  INVESTIGACIÓN",167,font(BOLD,22),WHITE)
+  d.line((285,220,615,220),fill=(221,187,122,185),width=3)
+  if index==0:
+    center(d,"EL SIGUIENTE CAPÍTULO",1115,font(SERIF,50),WHITE)
+    center(d,"EMPIEZA HOY",1190,font(SERIF,70),GOLD)
+    center(d,"TU INVESTIGACIÓN, TU AUTORÍA",1310,font(BOLD,31),WHITE)
+  elif index==7:
+    center(d,"¿NO VE SU SERVICIO?",1038,font(SERIF,49),WHITE)
+    center(d,"CONSULTE GRATIS",1125,font(SERIF,58),GOLD)
+    center(d,"WhatsApp",1209,font(BOLD,31),WHITE)
+    center(d,"+51 948 370 116",1260,font(SERIF,53),GOLD)
+    center(d,"PRECIOS REFERENCIALES DESDE",1370,font(BOLD,24),WHITE)
+    center(d,"Varían según hojas, procesos, complejidad,",1407,font(SANS,22),WHITE)
+    center(d,"citas, correcciones y requerimientos.",1443,font(SANS,22),WHITE)
   else:
-    center(d,"¡ESCRÍBANOS HOY!",975,font(SERIF,36),GOLD)
-  d.line((75,1113,646,1113),fill=GOLD,width=2)
-  center(d,"WhatsApp  +51 948 370 116",1130,font(BOLD,28),WHITE)
-  center(d,"systeraprime.com",1170,font(SANS,22),GOLD)
-  if index==7:
-    d.rounded_rectangle((36,530,W-36,724),radius=16,fill=(10,22,34,223),outline=GOLD,width=2)
-    for j,line in enumerate(("PRECIOS REFERENCIALES","Sujeto a hojas, complejidad, citas,","correcciones y requerimientos")):
-      center(d,line,552+j*47,font(BOLD if j==0 else SANS,24),GOLD if j==0 else WHITE)
-  out=WORK/f"overlay_{index:02d}.png";im.save(out);return out
+    # Big clear one-price-at-a-time titles, not a multi-service chart.
+    titlefont=font(SERIF,54 if len(title)<22 else 44)
+    center(d,title,1083,titlefont,WHITE)
+    d.line((218,1174,682,1174),fill=(220,182,105,198),width=2)
+    center(d,kicker,1195,font(BOLD,33),GOLD)
+    center(d,detail,1260,font(SANS,25),WHITE)
+    center(d,"DESDE",1328,font(BOLD,24),WHITE)
+    center(d,price,1370,font(SERIF,78),GOLD)
+  center(d,"systeraprime.com",1530,font(BOLD,26),WHITE)
+  out=WORK/f"overlay_{index:02d}.png"; im.save(out);return out
 def cmd(args):
   print("RUN", " ".join(map(str,args))[:240],flush=True)
   subprocess.run([str(x) for x in args],check=True)
@@ -132,8 +141,8 @@ def build():
     # The actor footage changes on every frame: these are real filmed video segments.
     cmd(["ffmpeg","-y","-hide_banner","-loglevel","error",
      "-stream_loop","-1","-ss","0.0","-i",src,"-loop","1","-i",png,
-     "-filter_complex",f"[0:v]fps={FPS},scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,trim=duration=5,setpts=PTS-STARTPTS,eq=contrast=1.035:saturation=1.03[bg];[bg][1:v]overlay=0:0:shortest=1,format=yuv420p,fade=t=in:st=0:d=0.25,fade=t=out:st=4.7:d=0.3[v]",
-     "-map","[v]","-an","-t","5","-r",str(FPS),"-c:v","libx264","-pix_fmt","yuv420p","-preset","veryfast","-b:v","1250k","-maxrate","1500k","-bufsize","2400k",part])
+     "-filter_complex",f"[0:v]fps={FPS},scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,trim=duration=5,setpts=PTS-STARTPTS,eq=contrast=1.08:brightness=0.018:saturation=1.12[bg];[bg][1:v]overlay=0:0:shortest=1,format=yuv420p,fade=t=in:st=0:d=0.25,fade=t=out:st=4.7:d=0.3[v]",
+     "-map","[v]","-an","-t","5","-r",str(FPS),"-c:v","libx264","-pix_fmt","yuv420p","-preset","veryfast","-b:v","1450k","-maxrate","1750k","-bufsize","2400k",part])
   lst=WORK/"parts.txt"
   lst.write_text("".join("file '"+str((WORK/f"part_{i:02d}.mp4").resolve())+"'\n" for i in range(8)))
   music=make_music()
