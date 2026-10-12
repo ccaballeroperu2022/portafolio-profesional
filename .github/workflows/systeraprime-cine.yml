@@ -1,0 +1,41 @@
+name: SysTeraPrime película cinematográfica 40 segundos
+
+on:
+  push:
+    branches:
+      - reel-systeraprime-cine-20261012
+    paths:
+      - 'reels/systeraprime/**'
+      - '.github/workflows/systeraprime-cine.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - name: Obtener proyecto
+        uses: actions/checkout@v4
+      - name: Preparar FFmpeg y fuentes
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install --upgrade pip
+          python -m pip install pillow numpy requests edge-tts
+      - name: Descargar video real y renderizar película
+        run: python reels/systeraprime/render.py
+      - name: Verificar duración, formato y peso
+        run: |
+          test -s reels/systeraprime/SysTeraPrime_PELICULA_40s_REEL.mp4
+          ffprobe -v error -show_entries format=duration,size:stream=codec_name,width,height -of json reels/systeraprime/SysTeraPrime_PELICULA_40s_REEL.mp4
+          stat -c '%s bytes' reels/systeraprime/SysTeraPrime_PELICULA_40s_REEL.mp4
+      - name: Entregar MP4 real
+        uses: actions/upload-artifact@v4
+        with:
+          name: SysTeraPrime-Pelicula-40s-MP4
+          path: reels/systeraprime/SysTeraPrime_PELICULA_40s_REEL.mp4
+          retention-days: 30
+          if-no-files-found: error
