@@ -18,14 +18,14 @@ SANS="/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 BOLD="/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 GOLD=(243,198,112); WHITE=(255,251,239); MUTED=(230,223,208)
 SCENES=[
- ("a-woman-working-in-a-boardroom-1785","¿SU TESIS NO AVANZA?","ASESORÍA ACADÉMICA","Profesional • personalizada",""),
- ("elegant-woman-working-hard-in-an-office-44787","APOYO EN TAREAS","ACOMPAÑAMIENTO","Orientación por actividad","S/ 15"),
+ ("business-meeting-in-a-meeting-room-42644","¿SU TESIS NO AVANZA?","ASESORÍA ACADÉMICA","Profesional • personalizada",""),
+ ("business-woman-on-call-while-working-42628","APOYO EN TAREAS","ACOMPAÑAMIENTO","Orientación por actividad","S/ 15"),
  ("a-man-wearing-a-suit-works-at-the-office-1816","INFORMES Y APA","REDACCIÓN ACADÉMICA","Normas APA • referencias","S/ 30"),
- ("portrait-of-an-elegant-woman-working-in-her-office-44790","ESTADÍSTICA","ANÁLISIS DE DATOS","Resultados e interpretación","S/ 30"),
- ("professional-woman-working-in-an-office-42664","PROYECTOS","INGENIERÍA Y SISTEMAS","Análisis • documentación","S/ 50"),
- ("a-woman-working-with-her-laptop-1788","INVESTIGACIONES","TESINAS Y ARTÍCULOS","Metodología • revisión","S/ 80"),
- ("elegant-woman-taking-a-call-in-the-office-44785","ASESORÍA DE TESIS","PROYECTO DE INVESTIGACIÓN","Guía por etapas • observaciones","S/ 150"),
- ("a-woman-working-in-her-office-199","¿SU SERVICIO NO APARECE?","COTICE GRATIS","Evaluamos su proyecto a medida",""),
+ ("a-woman-having-a-telephone-call-in-her-office-233","ESTADÍSTICA","ANÁLISIS DE DATOS","Resultados e interpretación","S/ 30"),
+ ("a-man-working-at-the-office-1820","PROYECTOS","INGENIERÍA Y SISTEMAS","Análisis • documentación","S/ 50"),
+ ("business-woman-working-from-home-4956","INVESTIGACIONES","TESINAS Y ARTÍCULOS","Metodología • revisión","S/ 80"),
+ ("a-woman-writing-an-email-on-her-smartphone-1787","ASESORÍA DE TESIS","PROYECTO DE INVESTIGACIÓN","Guía por etapas • observaciones","S/ 150"),
+ ("close-up-view-of-a-cheerful-woman-on-a-phone-49933","¿SU SERVICIO NO APARECE?","COTICE GRATIS","Evaluamos su proyecto a medida",""),
 ]
 def font(path,size):return ImageFont.truetype(path,size)
 def center(draw,text,y,f,fill):
@@ -36,6 +36,7 @@ def get_video(slug,i):
   session=requests.Session()
   session.headers.update({"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36","Referer":"https://mixkit.co/"})
   attempts=[f"https://assets.mixkit.co/videos/preview/mixkit-{slug}-{sz}.mp4" for sz in ("large","medium","small")]
+  attempts.append("https://huggingface.co/datasets/FastVideo/Mixkit-Src/resolve/main/Business/mixkit-"+slug+"_clip_1.mp4?download=true")
   for url in attempts:
     try:
       with session.get(url,timeout=45,stream=True) as r:
@@ -133,7 +134,7 @@ def build():
     part=WORK/f"part_{i:02d}.mp4"
     # The actor footage changes on every frame: these are real filmed video segments.
     cmd(["ffmpeg","-y","-hide_banner","-loglevel","error",
-     "-ss","0.3","-i",src,"-loop","1","-i",png,
+     "-stream_loop","-1","-ss","0.0","-i",src,"-loop","1","-i",png,
      "-filter_complex",f"[0:v]fps={FPS},scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,trim=duration=5,setpts=PTS-STARTPTS,eq=contrast=1.035:saturation=1.03[bg];[bg][1:v]overlay=0:0:shortest=1,format=yuv420p,fade=t=in:st=0:d=0.25,fade=t=out:st=4.7:d=0.3[v]",
      "-map","[v]","-an","-t","5","-r",str(FPS),"-c:v","libx264","-pix_fmt","yuv420p","-preset","veryfast","-b:v","1250k","-maxrate","1500k","-bufsize","2400k",part])
   lst=WORK/"parts.txt"
