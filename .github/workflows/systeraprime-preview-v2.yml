@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Load public licensed footage
         run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
           python -m pip install -q pillow requests
           cat > /tmp/check.py <<'PY'
           import os,re,json,pathlib,requests,subprocess,io
@@ -22,8 +23,27 @@ jobs:
           print('BUSINESS FILES',len(files),flush=True)
           print('\n'.join(files),flush=True)
           needles=['woman','man-wearing-a-suit','working-at-the-office','business-partners','meeting','document','report','chart','desk','paper','people','contract','businesswoman','collaborat','office']
-          candidates=[p for p in files if any(x in p.lower() for x in needles) and not any(x in p.lower() for x in ['highway','phone','street','aerial','city','car','people-dancing','stock'])]
-          candidates=candidates[:35]
+          wanted=[
+            'mixkit-elegant-woman-working-on-a-computer-44749',
+            'mixkit-portrait-of-an-elegant-woman-working-in-her-office-44790',
+            'mixkit-woman-and-man-working-in-an-office-312',
+            'mixkit-man-and-woman-commenting-on-an-image-on-a-laptop-4904',
+            'mixkit-business-meeting-in-a-meeting-room-42644',
+            'mixkit-office-meeting-261',
+            'mixkit-professional-woman-writing-on-a-tablet-with-a-stylus-44784',
+            'mixkit-woman-using-a-tablet-in-the-office-42627',
+            'mixkit-entrepreneur-woman-typing-on-her-laptop-42652',
+            'mixkit-pair-of-happy-office-workers-shake-hands-strongly-30009',
+            'mixkit-well-dressed-businessman-sending-messages-on-his-cell-phone-4805',
+            'mixkit-portrait-of-a-woman-writing-in-a-notepad-49915',
+            'mixkit-business-woman-working-from-home-4956',
+            'mixkit-woman-in-her-living-room-working-writing-in-a-notepad-49914',
+            'mixkit-office-workers-dressed-in-suits-with-disapproving-gestures-4604',
+            'mixkit-satisfied-woman-finishes-her-work-and-leaves-the-office-44750',
+            'mixkit-woman-working-on-a-laptop-251',
+            'mixkit-woman-writing-on-a-tablet-with-a-stylus-44740',
+            'mixkit-professional-woman-working-in-home-office-49925']
+          candidates=[p for prefix in wanted for p in files if p.startswith(prefix+'_')]
           print('CANDIDATES',len(candidates),flush=True)
           rows=[];ok=[]
           font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',17)
