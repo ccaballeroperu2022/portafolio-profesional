@@ -1,0 +1,178 @@
+{
+  "urls": [
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/56d7999d-fe40-4ec3-8eff-87aa4f8a72a2/STP_FINAL_REEL_1_Leslie.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiOTc1MjM0YjEwY2VjMWRjYyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTk5MTg1N30.tAPTcVr_kndpm71_PHDOvnCXJCzebvvkPqLaqrhhMHw",
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/6fde4481-9de2-46a4-b183-16ddf69b6994/STP_FINAL_REEL_2_Benjamin.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYmNhOTdkMzczNmYwMzE2ZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTk4MjY0N30.MTyVmi8WugU_JLrbA9yu34zpjnJ9-vpmxZCg2SoOqnU",
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/3732c2a2-695d-4e51-903e-f5bc7e7d99df/STP_FINAL_REEL_3_Eleanor.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZGJjNGIwNzdlYTdkMDkxZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MjAwMjkzNX0.QoKCC9_RL-hZ1PvgAeO2VpHO1SnaPyOdM9_X5D9yHqE",
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/eee3f0a2-f0a2-4cfe-8e0a-d1353aa5c39a/STP_FINAL_REEL_4_Frank.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMjE0MzcyMGE0NDZkOGJlYSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTk0NjYzNH0.L14WzcNRt15WQD876GOa-5SFDx4rnCDm-u541gU4JIQ",
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/4a87a784-7caf-4a83-9af2-61b04884a1d5/STP_FINAL_REEL_5_Serene.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYjVkNDU1NWZmYmRmZmI2MiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MjAwMjc4M30.4bF1mcDSMbuBan9Qm9dCpUESdrkQyZWBW8wgJ8P748I",
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/26252100-82f8-4f33-9835-7285f4cd8ce1/STP_FINAL_REEL_6_Tom.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNmUxZjlmZmQ0YjNkNzA5MCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTkyNDczM30.o1-2UvzvYvhwY1w-UeNH2Ad4apzSB5qUpdp_8fJaXyo",
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/1deb5e0e-bfd7-4e39-a50d-3370107852f4/STP_FINAL_REEL_7_Marlene.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZTdkMjAzZWM3ODkyYjIyOSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTk0MDQ2MH0.qqQWvJmWMmpm6nGyn8dROSm9NF6xy3xdSGDaPqJIGWQ",
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/8568e306-1f60-4164-abdb-eb5bdb1217ef/STP_FINAL_REEL_8_Mark.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiOTMxNjVjODMyNjA1NjI5ZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTk4MTgyN30._rtznUUoe4lcJWM8F_EX75H4kiHtcxmXE4sqoaCOw9U",
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/900405db-f6e7-4e70-a362-399f87ea0223/STP_FINAL_REEL_9_Ella.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODRjNzhlM2RiZjUyNDhhYSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTk1NTM4OX0.2ivN9VdlhnT2bYjUInbSEwlpU5iOUIz25BZpe_KkSVY",
+    "https://dnznrvs05pmza.cloudfront.net/text_to_speech/a41734b1-d5f1-49f9-b80e-5fc9a50a1966/STP_FINAL_REEL_10_Clint.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNTYxYzBjNDllMTUxOTdjYSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTk1MjEwNX0.UKVW3HIQunfgeB6KQN6Dz0Nqg43xe6V8Ey9LBovemnU"
+  ],
+  "voices": [
+    "Leslie",
+    "Benjamin",
+    "Eleanor",
+    "Frank",
+    "Serene",
+    "Tom",
+    "Marlene",
+    "Mark",
+    "Ella",
+    "Clint"
+  ],
+  "theme": [
+    {
+      "title": "TESIS SIN ESTANCARSE",
+      "head": [
+        "¿SU TESIS SE DETUVO?",
+        "CADA FUENTE IMPORTA",
+        "ANÁLISIS SIN DUDAS",
+        "PRESUPUESTO CLARO",
+        "AVANCE CON ASESORÍA"
+      ],
+      "pal": [
+        "#fffaf2",
+        "#a57a37",
+        "#3e332b"
+      ]
+    },
+    {
+      "title": "DOCUMENTOS IMPECABLES",
+      "head": [
+        "INFORMES DE ALTO NIVEL",
+        "APA CON PRECISIÓN",
+        "RESULTADOS SUSTENTADOS",
+        "REQUISITOS CLAROS",
+        "SU CONSULTA PROFESIONAL"
+      ],
+      "pal": [
+        "#fffaf0",
+        "#987c55",
+        "#38352d"
+      ]
+    },
+    {
+      "title": "DATOS QUE CUENTAN",
+      "head": [
+        "SUS DATOS TIENEN VOZ",
+        "GRAFICOS CON SENTIDO",
+        "DECISIONES BASADAS EN DATOS",
+        "EVALUACIÓN DETALLADA",
+        "CONVERSE CON UN EXPERTO"
+      ],
+      "pal": [
+        "#f7f9f1",
+        "#75886c",
+        "#2f4133"
+      ]
+    },
+    {
+      "title": "CORREGIR Y AVANZAR",
+      "head": [
+        "OBSERVACIONES DE TESIS",
+        "REVISIÓN DEL DOCUMENTO",
+        "METODOLOGÍA Y ESTADÍSTICA",
+        "CORRECCIONES Y PLAZOS",
+        "RETOME EL RUMBO"
+      ],
+      "pal": [
+        "#fff7f2",
+        "#ad6f57",
+        "#482e28"
+      ]
+    },
+    {
+      "title": "DE IDEA A PROYECTO",
+      "head": [
+        "UNA IDEA EXTRAORDINARIA",
+        "DISEÑO DE INVESTIGACIÓN",
+        "ANÁLISIS CON CRITERIO",
+        "COTIZACIÓN A SU MEDIDA",
+        "CONSTRUYA SU PROYECTO"
+      ],
+      "pal": [
+        "#fffcf3",
+        "#b79a53",
+        "#56442f"
+      ]
+    },
+    {
+      "title": "MÉTODO Y PRECISIÓN",
+      "head": [
+        "EL MÉTODO IMPORTA",
+        "OBJETIVOS COHERENTES",
+        "ARGUMENTOS SUSTENTADOS",
+        "PRESUPUESTO SIN SORPRESAS",
+        "ORIENTACIÓN PERSONALIZADA"
+      ],
+      "pal": [
+        "#f6f7f0",
+        "#6c8075",
+        "#343e3c"
+      ]
+    },
+    {
+      "title": "TECNOLOGÍA ACADÉMICA",
+      "head": [
+        "PROYECTOS INTELIGENTES",
+        "PLANIFICACIÓN DE SISTEMAS",
+        "DOCUMENTACIÓN TÉCNICA",
+        "REQUISITOS COMPLETOS",
+        "TECNOLOGÍA Y RIGOR"
+      ],
+      "pal": [
+        "#fef8ed",
+        "#b78351",
+        "#4c352a"
+      ]
+    },
+    {
+      "title": "INVESTIGAR CON CRITERIO",
+      "head": [
+        "INVESTIGAR ES DESCUBRIR",
+        "FUENTES CONFIABLES",
+        "TESINAS Y RESULTADOS",
+        "ALCANCE PERSONALIZADO",
+        "SU AUTORÍA PRIMERO"
+      ],
+      "pal": [
+        "#fafaf4",
+        "#8e8a6b",
+        "#494536"
+      ]
+    },
+    {
+      "title": "UNA CITA PARA AVANZAR",
+      "head": [
+        "¿NECESITA ORIENTACIÓN?",
+        "REVISIONES ACADÉMICAS",
+        "SU PLAN DE ACCIÓN",
+        "CADA CASO ES DIFERENTE",
+        "UNA CONSULTA GRATUITA"
+      ],
+      "pal": [
+        "#fff8f6",
+        "#b88d83",
+        "#52403d"
+      ]
+    },
+    {
+      "title": "ASESORÍA DE ALTO NIVEL",
+      "head": [
+        "EXCELENCIA ACADÉMICA",
+        "CALIDAD Y SEGUIMIENTO",
+        "UNA INVESTIGACIÓN SOLIDA",
+        "SERVICIO PERSONALIZADO",
+        "PRESUPUESTO SIN COMPROMISO"
+      ],
+      "pal": [
+        "#fffaf0",
+        "#aa925a",
+        "#443b2b"
+      ]
+    }
+  ]
+}
