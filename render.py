@@ -130,7 +130,9 @@ def main(reel):
   # Source is real-motion footage: entire actor footage is shown, not illustrated
   filt=('[0:v]fps=24,scale=1080:1290:force_original_aspect_ratio=increase,crop=1080:1290,'
         'setsar=1,eq=contrast=1.03:saturation=0.98[real];'
-        '[real][1:v]overlay=0:0:shortest=1,format=yuv420p[v]')
+        'color=c=0xfffaf4:s=1080x1920:r=24:d=8.32[base];'
+        '[base][real]overlay=0:0:shortest=1[shot];'
+        '[shot][1:v]overlay=0:0:shortest=1,format=yuv420p[v]')
   run('ffmpeg','-y','-v','error','-stream_loop','-1','-i',vid,
       '-loop','1','-framerate','24','-i',card,
       '-filter_complex',filt,'-map','[v]','-t','8.32','-r','24',
