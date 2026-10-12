@@ -107,18 +107,15 @@ def make_music():
     f.setnchannels(1);f.setsampwidth(2);f.setframerate(sr)
     f.writeframes((data*32767).astype("<i2").tobytes())
   return out
-async def create_voice():
-  script=("¿Su tesis está estancada? En SysTeraPrime le ayudamos a avanzar "
-  "con orientación académica personalizada. Apoyo en tareas desde quince soles, "
-  "informes y normas APA desde treinta, estadística desde treinta, "
-  "proyectos de ingeniería desde cincuenta, investigaciones desde ochenta "
-  "y asesoría de tesis desde ciento cincuenta soles. "
-  "El presupuesto depende de hojas, complejidad, correcciones y requerimientos. "
-  "¿No encuentra su servicio? Consulte gratis por WhatsApp "
-  "al más cincuenta y uno, nueve cuatro ocho, tres siete cero, uno uno seis.")
+def create_voice():
+  url="https://dnznrvs05pmza.cloudfront.net/text_to_speech/772ebe79-b636-4bdb-904b-4d21e4a83b9c/SysTeraPrime_Locuci_n_Premium_Cine_40s.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMTAwMmNjNzcxZDM4Nzg1NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTkzNzI3MX0.UaeMmfP5pwhN7AgorWs7B8sMhPr82HHJ5WZdvgSB8vw"
   raw=WORK/"locutora_es_mexico.mp3"
-  await edge_tts.Communicate(script,voice="es-MX-DaliaNeural",rate="+10%",pitch="+0Hz").save(str(raw))
-  d=probe(raw);target=38.5;speed=max(1,d/target)
+  response=requests.get(url,timeout=50,headers={"User-Agent":"Mozilla/5.0"})
+  print("VOICE DOWNLOAD",response.status_code,len(response.content),flush=True)
+  response.raise_for_status()
+  raw.write_bytes(response.content)
+  if b"ID3" not in response.content[:10] and b"\xff\xfb" not in response.content[:10] and b"\xff\xf3" not in response.content[:10]:print("Audio may have nonstandard header; ffprobe validates",flush=True)
+  d=probe(raw); target=38.5; speed=max(1,d/target)
   out=WORK/"voz_final.m4a"
   cmd(["ffmpeg","-y","-hide_banner","-loglevel","error","-i",raw,"-af",f"atempo={speed:.5f},aresample=48000","-c:a","aac","-b:a","112k",out])
   print("VOICE",d,"adjusted",probe(out),flush=True)
@@ -140,7 +137,7 @@ def build():
   lst=WORK/"parts.txt"
   lst.write_text("".join("file '"+str((WORK/f"part_{i:02d}.mp4").resolve())+"'\n" for i in range(8)))
   music=make_music()
-  try:voice=asyncio.run(create_voice())
+  try:voice=create_voice()
   except Exception as e:
     raise RuntimeError("Falló la locución femenina natural; se detiene la exportación para evitar entregar otro MP4 sin voz.") from e
   cmd(["ffmpeg","-y","-hide_banner","-loglevel","error","-f","concat","-safe","0","-i",lst,"-i",voice,"-i",music,
