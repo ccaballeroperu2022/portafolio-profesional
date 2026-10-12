@@ -1,0 +1,174 @@
+name: SysTeraPrime cine - real actors 40s
+on:
+  push:
+    branches: [systeraprime-reel-cine-20261012]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  movie:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install --user 'Pillow>=10,<13' 'edge-tts>=7,<9'
+      - name: Download authentic motion footage and render
+        shell: bash
+        run: |
+          cat > /tmp/movie.py <<'PY'
+          import os, pathlib, subprocess, urllib.request, asyncio, wave, math, array
+          from PIL import Image,ImageDraw,ImageFont
+          root=pathlib.Path.cwd(); w=root/'work'; w.mkdir(exist_ok=True)
+          out=root/'output';out.mkdir(exist_ok=True)
+          specs=[
+            ('APOYO ACADÉMICO','two-business-people-walk-in-an-office-hall',315,6.0),
+            ('INFORMES Y ESTADÍSTICA','business-people-at-work-meeting',4809,6.5),
+            ('PROYECTOS Y TESINAS','two-people-working-in-a-large-office',4804,6.5),
+            ('ASESORÍA INTEGRAL','colleagues-reading-a-report-together',313,7.0),
+            ('COTIZACIÓN PERSONALIZADA','two-people-at-a-business-meeting',4817,7.0),
+            ('CONSULTA GRATUITA','woman-working-in-an-office-flips-smiling',4876,7.0)]
+          assert sum(s[3] for s in specs)==40
+          F='/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf'
+          FB='/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf'
+          SB='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+          S='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+          def run(*cmd):subprocess.run(list(map(str,cmd)),check=True)
+          def valid(p):
+            q=subprocess.run(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=codec_name','-of','default=noprint_wrappers=1',p],capture_output=True,text=True)
+            return q.returncode==0 and 'codec_name=' in q.stdout
+          def download(slug,n):
+            p=w/f'{n}.mp4'
+            if valid(p):return p
+            for size in ('large','small'):
+              url=f'https://assets.mixkit.co/videos/preview/mixkit-{slug}-{n}-{size}.mp4'
+              try:
+                req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+                with urllib.request.urlopen(req,timeout=45) as source,open(p,'wb') as dest:
+                  while True:
+                    b=source.read(512000)
+                    if not b:break
+                    dest.write(b)
+                if valid(p):return p
+              except Exception as e:print('Source error',url,e,flush=True)
+              p.unlink(missing_ok=True)
+            raise RuntimeError('Motion video unavailable: '+slug+'; abort, no photo substitute')
+          def f(size,b=False,ser=False):return ImageFont.truetype((FB if b else F) if ser else (SB if b else S),size)
+          def txt(d,s,y,size=28,color='#272522',bold=False,serif=False):
+            ft=f(size,bold,serif)
+            left,top,right,bot=d.textbbox((0,0),s,font=ft)
+            d.text(((720-(right-left))/2,y),s,font=ft,fill=color)
+          def price(d,s,amount,y):
+            d.text((30,y),s,font=f(23,True),fill='#282523')
+            ft=f(34,True,True);bx=d.textbbox((0,0),amount,font=ft)
+            d.text((708-(bx[2]-bx[0]),y-6),amount,font=ft,fill='#ab7936')
+            d.line((28,y+52,692,y+52),fill='#dcc9ad',width=2)
+          def image(i,title):
+            p=w/f'card{i}.png';im=Image.new('RGBA',(720,1280),(0,0,0,0));d=ImageDraw.Draw(im)
+            d.rectangle((0,765,720,1280),fill='#fffaf2')
+            d.rectangle((0,762,720,768),fill='#b18955')
+            d.rounded_rectangle((95,22,625,68),radius=20,fill='#fffaf2',outline='#b18955',width=2)
+            txt(d,'SYSTERAPRIME | SERVICIOS ACADÉMICOS',33,19,'#986c35',True)
+            txt(d,title,799,30,'#24221f',True,True)
+            d.line((55,857,665,857),fill='#b18955',width=2)
+            if i==0:
+              txt(d,'TAREAS ACADÉMICAS',907,30,bold=True)
+              txt(d,'DESDE S/ 15',983,48,'#ab7936',True,True)
+            elif i==1:
+              price(d,'Informes y monografías APA','S/ 30',915)
+              price(d,'Estadística y datos','S/ 30',1010)
+            elif i==2:
+              price(d,'Proyectos y sistemas','S/ 50',915)
+              price(d,'Investigaciones y tesinas','S/ 80',1010)
+            elif i==3:
+              price(d,'Asesoría integral de tesis','S/ 150',915)
+              price(d,'Otras áreas académicas','S/ 30',1010)
+            elif i==4:
+              txt(d,'Precios referenciales. Pueden variar por:',910,22,bold=True)
+              txt(d,'hojas, complejidad, citas, dedicación,',970,22)
+              txt(d,'correcciones, indicaciones y plazos.',1010,22)
+              txt(d,'Proyectos integrales: previa evaluación.',1070,20,'#ab7936',True)
+            else:
+              txt(d,'Magíster Carlos Caballero',916,26)
+              txt(d,'WHATSAPP',969,24,'#ab7936',True)
+              txt(d,'+51 948 370 116',1014,42,'#ab7936',True,True)
+              txt(d,'systeraprime.com',1088,28,bold=True)
+            d.line((55,1150,665,1150),fill='#cfb990',width=2)
+            txt(d,'Magíster Carlos Caballero',1170,21,'#75695d')
+            txt(d,'systeraprime.com  |  WhatsApp +51 948 370 116',1210,19,bold=True)
+            im.save(p);return p
+          clips=[]
+          for title,slug,id_,dur in specs:clips.append(download(slug,id_))
+          pieces=[]
+          for i,((title,slug,id_,dur),clip) in enumerate(zip(specs,clips)):
+            overlay=image(i,title)
+            v=w/f'shot{i}.mp4'
+            flt=('[0:v]fps=25,scale=720:762:force_original_aspect_ratio=increase,crop=720:762,setsar=1[real];'
+              f'color=c=0xfffaf2:s=720x1280:r=25:d={dur}[base];'
+              '[base][real]overlay=0:0:shortest=1[movie];'
+              '[movie][1:v]overlay=0:0,format=yuv420p[v]')
+            run('ffmpeg','-y','-v','error','-stream_loop','-1','-i',clip,
+                '-loop','1','-framerate','25','-i',overlay,
+                '-filter_complex',flt,'-map','[v]','-an','-t',dur,
+                '-c:v','libx264','-preset','fast','-crf','22','-r','25','-pix_fmt','yuv420p',v)
+            pieces.append(v)
+          filelist=w/'files.txt';filelist.write_text(''.join("file '"+str(p.resolve())+"'\n" for p in pieces))
+          silent=w/'video.mp4'
+          run('ffmpeg','-y','-v','error','-f','concat','-safe','0','-i',filelist,'-c','copy',silent)
+          # Original, royalty-free, locally synthesized music bed
+          sr=22050;buf=array.array('h')
+          chords=((196,246.94,293.66),(174.61,220,261.63),(164.81,196,246.94),(174.61,220,293.66))
+          for k in range(40*sr):
+            t=k/sr;freqs=chords[int(t//5)%4]
+            val=sum(math.sin(2*math.pi*z*t) for z in freqs)/3*0.12
+            buf.append(int(val*32767))
+          bed=w/'music.wav'
+          with wave.open(str(bed),'wb') as wav:
+            wav.setnchannels(1);wav.setsampwidth(2);wav.setframerate(sr);wav.writeframes(buf.tobytes())
+          voice=w/'voice.mp3'
+          speech=('Asesoría académica profesional en SysTeraPrime. '
+              'Tareas desde quince soles. Informes y monografías APA, desde treinta. '
+              'Estadística y análisis de datos, desde treinta. Proyectos y sistemas desde cincuenta. '
+              'Investigaciones y tesinas, desde ochenta. Asesoría integral de tesis desde ciento cincuenta. '
+              'Otras áreas académicas desde treinta. Los precios son referenciales y varían según extensión, '
+              'complejidad, dedicación, citas, indicaciones, correcciones y plazos. '
+              'Los proyectos integrales requieren evaluación. '
+              'Magíster Carlos Caballero. Consulta inicial gratuita. '
+              'Visítenos en sistéra praim punto com, o escríbanos al WhatsApp más cincuenta y uno, '
+              'nueve cuatro ocho, tres siete cero, uno uno seis.')
+          try:
+            import edge_tts
+            asyncio.run(edge_tts.Communicate(speech,voice='es-MX-DaliaNeural',rate='+18%').save(str(voice)))
+            probe=subprocess.run(['ffprobe','-v','error','-show_entries','format=duration',
+               '-of','default=noprint_wrappers=1:nokey=1',voice],capture_output=True,text=True,check=True)
+            ttslen=float(probe.stdout.strip());speed=max(1.0,ttslen/38)
+            mix=w/'audio.m4a'
+            run('ffmpeg','-y','-v','error','-i',bed,'-i',voice,'-filter_complex',
+                 f'[0:a]volume=0.38[m];[1:a]atempo={speed:.5f},apad,volume=1.5[v];[m][v]amix=inputs=2:duration=first[a]',
+                 '-map','[a]','-t','40','-c:a','aac','-b:a','128k',mix)
+          except Exception as e:
+            print('Natural narration unavailable; original instrumental only:',str(e),flush=True)
+            mix=bed
+          target=out/'SysTeraPrime_PELICULA_REEL_40s.mp4'
+          run('ffmpeg','-y','-v','error','-i',silent,'-i',mix,
+            '-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac',
+            '-b:a','128k','-t','40','-movflags','+faststart',target)
+          p=subprocess.run(['ffprobe','-v','error','-show_entries','format=duration',
+             '-show_entries','stream=codec_type,width,height','-of','default=noprint_wrappers=1',target],
+             capture_output=True,text=True,check=True)
+          print('QA',p.stdout,flush=True)
+          dur=float([r.split('=')[1] for r in p.stdout.splitlines() if r.startswith('duration=')][0])
+          assert abs(dur-40)<.15 and 'codec_type=video' in p.stdout and 'codec_type=audio' in p.stdout
+          print('PASS',target)
+          PY
+          python /tmp/movie.py
+      - name: Upload finished movie
+        uses: actions/upload-artifact@v4
+        with:
+          name: SysTeraPrime_PELICULA_REEL_40s
+          path: output/SysTeraPrime_PELICULA_REEL_40s.mp4
+          retention-days: 7
+          if-no-files-found: error
