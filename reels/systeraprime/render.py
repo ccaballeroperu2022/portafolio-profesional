@@ -24,7 +24,7 @@ SCENES=[
  ("a-woman-using-a-tablet-1784","ESTADÍSTICA","ANÁLISIS DE DATOS","Resultados • gráficos • interpretación","S/ 30"),
  ("business-woman-on-call-while-working-42628","PROYECTOS Y SISTEMAS","DESARROLLO TÉCNICO","Análisis • diseño • documentación","S/ 50"),
  ("a-young-woman-scans-the-library-shelf-and-then-picks-50718","INVESTIGACIONES","TESINAS Y ARTÍCULOS","Metodología • revisión • referencias","S/ 80"),
- ("a-young-student-woman-picks-a-book-from-the-library-50714","ASESORÍA INTEGRAL DE TESIS","AVANCE POR ETAPAS","Guía metodológica • observaciones","S/ 150"),
+ ("a-young-woman-reading-a-book-with-interest-50716","ASESORÍA INTEGRAL DE TESIS","AVANCE POR ETAPAS","Guía metodológica • observaciones","S/ 150"),
  ("close-up-view-of-a-cheerful-woman-on-a-phone-49933","¿NECESITA OTRO SERVICIO?","COTIZACIÓN GRATUITA","Cuéntenos su proyecto académico",""),
 ]
 def font(path,size):return ImageFont.truetype(path,size)
@@ -89,8 +89,8 @@ def overlay(scene,index):
     center(d,kicker,1195,font(BOLD,33),GOLD)
     center(d,detail,1260,font(SANS,25),WHITE)
     center(d,"DESDE",1328,font(BOLD,24),WHITE)
-    center(d,price,1370,font(SERIF,78),GOLD)
-  center(d,"systeraprime.com",1530,font(BOLD,26),WHITE)
+    center(d,price,1360,font(SERIF,96),GOLD)
+  center(d,"systeraprime.com  |  WhatsApp +51 948 370 116",1527,font(BOLD,24),WHITE)
   out=WORK/f"overlay_{index:02d}.png"; im.save(out);return out
 def cmd(args):
   print("RUN", " ".join(map(str,args))[:240],flush=True)
