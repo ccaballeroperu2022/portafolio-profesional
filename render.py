@@ -30,7 +30,7 @@ def main(reel):
  files=[x['path'].split('/')[-1] for x in rr.json() if x.get('path','').lower().endswith('.mp4')]
  humans=['woman','women','man-','-man-','people','colleague','team','coworker','business','entrepreneur','employee','professional','person','executive','worker','office']
  activities=['working','typing','writing','report','office','laptop','tablet','meeting','computer','documents','notes','contract','present','reading','suit','planning','phone','desk','call','business','presentation','team','discussion']
- banned=['car-','truck','construction','drone','aerial','factory','party','danc','exercise','running','hike','street','solar-panel','wind-farm','shipping','containers','warehouse','machine','industrial','camera','virus','mask','ski']
+ banned=['car-','truck','construction','drone','aerial','factory','party','danc','presenter-on-radio','exercise','running','hike','street','solar-panel','wind-farm','shipping','containers','warehouse','machine','industrial','camera','virus','mask','ski']
  pool=sorted(p for p in files if any(k in p.lower() for k in humans) and any(k in p.lower() for k in activities) and not any(k in p.lower() for k in banned))
  # A curated priority list ensures realistic activities: typing, reading, consulting, reviewing.
  assert len(pool)>=50,('Insufficient nonrepeating live-action sources',len(pool))
@@ -178,10 +178,10 @@ def main(reel):
    else:
     for pitch in notes:
      events.append((start*480,1,pitch,23))
-     events.append(((start+3.88)*480,0,pitch,0))
+     events.append((int((start+3.88)*480),0,pitch,0))
   events.sort(key=lambda z:(z[0],z[1]));last=0
   for tick,on,pitch,velocity in events:
-   t.append(Message('note_on' if on else 'note_off',channel=ch,note=pitch,velocity=velocity,time=tick-last));last=tick
+   t.append(Message('note_on' if on else 'note_off',channel=ch,note=pitch,velocity=velocity,time=int(tick-last)));last=tick
   t.append(MetaMessage('end_of_track'))
  midi=work/'music.mid';mid.save(midi)
  sf='/usr/share/sounds/sf2/FluidR3_GM.sf2'
