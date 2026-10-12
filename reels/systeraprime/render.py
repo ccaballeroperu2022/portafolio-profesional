@@ -39,11 +39,14 @@ def get_video(slug,i):
   for url in attempts:
     try:
       with session.get(url,timeout=45,stream=True) as r:
-        if r.status_code!=200:continue
+        if r.status_code!=200:
+          print('CDN HTTP',r.status_code,url,flush=True)
+          continue
         with dest.open("wb") as f:
           for block in r.iter_content(1024*256):
             if block:f.write(block)
       with dest.open("rb") as f:header=f.read(48)
+      if b'ftyp' not in header: print('INVALID HEADER',slug,repr(header[:30]),flush=True)
       if b"ftyp" in header and dest.stat().st_size>80000:
         print("DOWNLOADED",slug,dest.stat().st_size,flush=True);return dest
     except Exception as e:print("download retry",slug,str(e)[:100],flush=True)
