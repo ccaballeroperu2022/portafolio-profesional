@@ -28,7 +28,7 @@ jobs:
            ('mixkit-woman-and-man-working-in-an-office-312_clip_1.mp4',6.0),
            ('mixkit-woman-using-a-tablet-in-the-office-42627_clip_1.mp4',7.1),
            ('mixkit-man-and-woman-commenting-on-an-image-on-a-laptop-4904_clip_1.mp4',7.1),
-           ('mixkit-woman-writing-on-a-tablet-with-a-stylus-44740_clip_1.mp4',7.1),
+           ('mixkit-professional-woman-writing-on-a-tablet-with-a-stylus-44784_clip_1.mp4',7.1),
            ('mixkit-elegant-woman-working-on-a-computer-44749_clip_1.mp4',7.1),
            ('mixkit-well-dressed-businessman-sending-messages-on-his-cell-phone-4805_clip_1.mp4',7.35)
           ]
@@ -142,6 +142,7 @@ jobs:
           print('VISUAL',info(movie),flush=True)
           # 40-second instrumental with real piano and string samples, original MIDI arrangement.
           mid=MidiFile(ticks_per_beat=480)
+          tempo_track=MidiTrack();tempo_track.append(MetaMessage('set_tempo',tempo=bpm2tempo(96),time=0));mid.tracks.append(tempo_track)
           def track(channel,program,notes):
            tr=MidiTrack();mid.tracks.append(tr)
            tr.append(Message('program_change',channel=channel,program=program,time=0))
