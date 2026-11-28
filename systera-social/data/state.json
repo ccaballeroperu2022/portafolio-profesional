@@ -1376,6 +1376,14 @@
       "groups_prepared": 0,
       "outcomes": [],
       "revenue": "NO VERIFICADO (no hay lectura autorizada de ingresos)"
+    },
+    "2026-11-28-1": {
+      "at": "2026-11-28T09:11:46.802778-05:00",
+      "prepared_posts": 4,
+      "prepared_short_scripts": 2,
+      "groups_prepared": 0,
+      "outcomes": [],
+      "revenue": "NO VERIFICADO (no hay lectura autorizada de ingresos)"
     }
   }
 }
